@@ -41,6 +41,7 @@ def generate_detections(pil_img_obj, interpreter, threshold):
     bboxes  = bboxes[keep_idx]
     classes = classes[keep_idx]
     
+    # denormalize bounding box dimensions
     if len(keep_idx) > 0:
         bboxes[:,0] = bboxes[:,0] * pil_img_obj.size[1]
         bboxes[:,1] = bboxes[:,1] * pil_img_obj.size[0]
