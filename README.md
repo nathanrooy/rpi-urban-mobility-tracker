@@ -10,11 +10,17 @@ sudo apt-get install libqtgui4 libqtwebkit4 libqt4-test python3-pyqt5
 sudo apt-get install libatlas-base-dev
 sudo apt-get install libjasper-dev
 ```
+Next, create a virtual environment using `virtualenv` and `python 3.7`
+```
+sudo apt-get install virtualenv
+virtualenv -p python3.6 venv
+```
+
 Now, install cv2
 ```
 sudo apt-get install python-opencv
 ```
-Next, install the required python libraries
+Finally, install the required python libraries
 ```
 pip install numpy
 pip install imutils
