@@ -3,6 +3,26 @@ The Raspberry Pi Urban Mobility Tracker is the simplest way to track and count p
 
 ## Install
 
+First install the required dependencies for cv2
+```
+sudo apt-get install libhdf5-dev libhdf5-serial-dev libhdf5-100
+sudo apt-get install libqtgui4 libqtwebkit4 libqt4-test python3-pyqt5
+sudo apt-get install libatlas-base-dev
+sudo apt-get install libjasper-dev
+```
+Now, install cv2
+```
+sudo apt-get install python-opencv
+```
+Next, install the required python libraries
+```
+pip install numpy
+pip install imutils
+pip install matplotlib
+pip install scipy
+pip install Pillow
+```
+
 
 ## Usage
 To run while using the Raspberry Pi camera data source run the following:
