@@ -125,6 +125,8 @@ def track_image_seq(args, interpreter, tracker, labels, colors):
     
 def track_video(args, interpreter, tracker, labels, colors):
 
+    assert os.path.exists(args.video_path)==True, "can't find the specified video file..."
+    
     with open('object_paths.txt', 'w') as out_file:
     
         counter = 0
