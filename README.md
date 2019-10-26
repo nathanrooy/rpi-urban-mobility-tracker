@@ -13,7 +13,7 @@ sudo apt-get install libjasper-dev
 Next, create a virtual environment using `virtualenv` and `python 3.7`
 ```
 sudo apt-get install virtualenv
-virtualenv -p python3.6 venv
+virtualenv -p python3.7 venv
 ```
 
 Now, install cv2
