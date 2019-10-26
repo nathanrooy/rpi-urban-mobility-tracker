@@ -27,29 +27,21 @@ sudo apt-get install python-opencv
 ```
 Finally, install the required python libraries
 ```
-pip install numpy
+pip install filterpy
 pip install imutils
 pip install matplotlib
-pip install scipy
+pip install numpy
 pip install Pillow
+pip install scipy
+pip install scikit-image
 ```
-
+To run models using TensorFlow Lite, you'll need to install the interpreter which can be found [<a target="_blank" href="https://www.tensorflow.org/lite/guide/python">here</a>].
 
 ## Usage
 To run while using the Raspberry Pi camera data source run the following:
 ``` 
-python main.py --camera
+python main.py -camera
 ```
-Run the tracker using a video file as input:
+To run the tracker on an image sequence, append the `-imageseq` flag and provide a path to the images. Included in this repo are the first 300 frames from the MOT (<a target="_blank" href="https://motchallenge.net/">Multiple Object Tracking Benchmark</a>) Challenge <a target="_blank" href="https://motchallenge.net/vis/PETS09-S2L1">PETS09-S2L1</a> video.
 ```
-python main.py --video
-```
-
-
-## Todo
-- [ ] Get Coral usb working
-- [ ] Transfer learn new model
-- [ ] Implement an efficient mobile version of Deep SORT [<a target="_blank" href="https://arxiv.org/abs/1703.07402">arxiv</a>]
-- [ ] Finish designing mounting hardware
-- [ ] Create example data processing notebooks
-
+python main.py -imageseq data/images/PETS09-S2L1/

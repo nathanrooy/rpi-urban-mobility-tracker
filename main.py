@@ -81,26 +81,27 @@ def persist_image_output(pil_img, trackers, tracker_labels, tracker_scores, colo
         rect = Rectangle((d[0],d[1]),d[2]-d[0],d[3]-d[1], fill=False, lw=2, ec=colors[d[4]%32,:])
         ax.add_patch(rect)
         
-    plt.savefig(f'output/tf_sort_frame_{frame}.jpg')
+    plt.savefig(f'output/frame_{frame}.jpg')
 
     pass
     
     
 def track_image_seq(args, interpreter, tracker, labels, colors):
 
-    img_path='data/images/PETS09-S2L1/'
-
-
+    # collect images to be processed
+    images = []
+    for item in sorted(os.listdir(args.image_path)):
+        if '.jpg' in item:
+            images.append(f'{args.image_path}{item}')
+    
+    # cycle through image sequence
     with open('object_paths.txt', 'w') as out_file:
-
-        # cycle through frames
-        for frame in range(1, 10, 1):
+        for frame in range(1, args.nframes, 1):
 
             print(f'> FRAME: {frame}')
 
             # load image
-            fn = f'{img_path}{frame:06d}.jpg'
-            pil_img = Image.open(fn)
+            pil_img = Image.open(images[frame])
 
             # get detections
             new_dets, classes, scores = generate_detections(pil_img, interpreter, 0.65)
@@ -198,12 +199,12 @@ def main(args):
     tracker = Sort()
     
     # track objects from video file
-    if args.video:
+    if args.video_path:
         # in progress
         pass
     
     # track objects in image sequence
-    if args.img_path:
+    if args.image_path:
         track_image_seq(args, interpreter, tracker, labels, colors)
         
     # track objects from camera source
@@ -219,15 +220,12 @@ if __name__ == '__main__':
     
     # parse arguments
     parser = argparse.ArgumentParser(description='--- Raspbery Pi Urban Mobility Tracker ---')
-    parser.add_argument('--tpu', dest='tpu', help="Append this argument if you're currently using the Google Coral USB Accelerator", action='store_true')
-    parser.add_argument('--camera', dest='camera', help="Append this argument if you're currently using a camera as your visual input", action='store_true')
-    parser.add_argument('--video', dest='video', help="Append this argument if you're currently using a video file as your visual input", action='store_true')
-    parser.add_argument('--images', dest='img_path', help="Append this argument if you're currently using a sequence of images as your input", action='store_true')
-    parser.add_argument('--tflite', dest='tflite_path', help="Append this argument if you're currently using a sequence of images as your input", action='store_true')
-    parser.add_argument('--threshold', dest='threshold', help="Append this argument if you're currently using a sequence of images as your input", action='store_true')
-    parser.add_argument('--nframes', dest='nframes', help="Specify the number of image or video frames to process. If this is not specified, all frames in video or image directory will be processed.", action='store_true')
-    parser.add_argument('--display', dest='display', help="saves image output. will greatly slow down fps.", action='store_true')
-    parser.add_argument('--label_map', dest='labelmap', help="something...", action='store_true')
+    parser.add_argument('-imageseq', dest='image_path', type=str, required=False, help='specify an image sequence')
+    parser.add_argument('-video', dest='video_path', type=str, required=False, help='specify video file')
+    parser.add_argument('-camera', dest='camera', default=False, action='store_true', help='specify this when using the rpi camera as the input')
+    parser.add_argument('-tpu', dest='tpu', required=False, default=False, action='store_true', help='add this when using a coral usb accelerator')
+    parser.add_argument('-nframes', dest='nframes', type=int, required=False, default=10, help='specify nunber of frames to process')
+    parser.add_argument('-display', dest='display', required=False, default=False, action='store_true', help='add this flag to output images from tracker. note, that this will greatly slow down the fps rate.')
     args = parser.parse_args()
     
     # begin tracking
