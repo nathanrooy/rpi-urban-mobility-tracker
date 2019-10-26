@@ -16,4 +16,5 @@ python main.py --video
 ## Todo
 - [ ] Get Coral usb working
 - [ ] Transfer learn new model
+- [ ] Implement an efficient mobile version of Deep SORT [<a target="_blank" href="https://arxiv.org/abs/1703.07402">arxiv</a>]
 
