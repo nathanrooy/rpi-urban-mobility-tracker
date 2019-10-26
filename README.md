@@ -54,7 +54,14 @@ By default, only the first 10 frames will be processed. To increase or decrease 
 ```
 python main.py -imageseq data/images/PETS09-S2L1/ -display -nframes 20
 ```
-
+To run the tracker using a video file input, append the `-video` flag followed by a path to the video file. Included in this repo are two video clips of vehicle traffic.
+```
+python main.py -video data/videos/highway_01.mp4
+```
+In certain instances, you may want to override the default object detection threshold (default=0.5). To accompish this, append the `-threshold` flag followed by a float value in the range of [0,1]. A value closer to one will yield fewer detections with higher certainty while a value closer to zero will result in more detections with lower certainty. It's usually better to error on the side of lower certainty since these objects can always be filtered out during post processing.
+```
+python main.py -video data/videos/highway_01.mp4 -display -nframes 100 -threshold 0.4
+```
 
 ## Todo
 - [ ] Get Coral usb working
