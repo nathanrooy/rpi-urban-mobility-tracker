@@ -104,7 +104,7 @@ def track_image_seq(args, interpreter, tracker, labels, colors):
             pil_img = Image.open(images[frame])
 
             # get detections
-            new_dets, classes, scores = generate_detections(pil_img, interpreter, 0.65)
+            new_dets, classes, scores = generate_detections(pil_img, interpreter, args.threshold)
 
             # update tracker
             trackers = tracker.update(new_dets)
@@ -123,8 +123,43 @@ def track_image_seq(args, interpreter, tracker, labels, colors):
     pass
     
     
-def track_video(args):
+def track_video(args, interpreter, tracker, labels, colors):
 
+    with open('object_paths.txt', 'w') as out_file:
+    
+        counter = 0
+        cap = cv2.VideoCapture(args.video_path)
+        while(cap.isOpened()):
+            print(counter)
+
+            # pull frame from video stream
+            ret, frame = cap.read()
+
+            # array to PIL image format
+            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            pil_img = Image.fromarray(frame)
+
+            # get detections
+            new_dets, classes, scores = generate_detections(pil_img, interpreter, args.threshold)
+
+            # update tracker
+            trackers = tracker.update(new_dets)
+        
+            # match classes up to detections
+            tracker_labels, tracker_scores = match_detections_to_labels_and_scores(new_dets, trackers, scores, classes, labels)
+
+            # save image output
+            if(args.display):
+                persist_image_output(pil_img, trackers, tracker_labels, tracker_scores, colors, counter)
+
+            # save object locations
+            for d, tracker_label, tracker_score in zip(trackers, tracker_labels, tracker_scores):
+                print(f'{frame},{d[4]},{d[0]},{d[1]},{d[2]-d[0]},{d[3]-d[1]},{tracker_label},{tracker_score}', file=out_file)
+
+            counter += 1
+            
+            if counter >= args.nframes: break
+            if cv2.waitKey(1) & 0xFF == ord('q'): break
     pass
     
     
@@ -149,7 +184,7 @@ def track_camera(args, interpreter, tracker, labels, colors):
             pil_img = Image.fromarray(frame)
 
             # get detections
-            new_dets, classes, scores = generate_detections(pil_img, interpreter, 0.65)
+            new_dets, classes, scores = generate_detections(pil_img, interpreter, args.threshold)
 
             # update tracker
             trackers = tracker.update(new_dets)
@@ -200,8 +235,7 @@ def main(args):
     
     # track objects from video file
     if args.video_path:
-        # in progress
-        pass
+        track_video(args, interpreter, tracker, labels, colors)
     
     # track objects in image sequence
     if args.image_path:
@@ -223,6 +257,7 @@ if __name__ == '__main__':
     parser.add_argument('-imageseq', dest='image_path', type=str, required=False, help='specify an image sequence')
     parser.add_argument('-video', dest='video_path', type=str, required=False, help='specify video file')
     parser.add_argument('-camera', dest='camera', default=False, action='store_true', help='specify this when using the rpi camera as the input')
+    parser.add_argument('-threshold', dest='threshold', type=float, default=0.5, required=False, help='specify a custom inference threshold')
     parser.add_argument('-tpu', dest='tpu', required=False, default=False, action='store_true', help='add this when using a coral usb accelerator')
     parser.add_argument('-nframes', dest='nframes', type=int, required=False, default=10, help='specify nunber of frames to process')
     parser.add_argument('-display', dest='display', required=False, default=False, action='store_true', help='add this flag to output images from tracker. note, that this will greatly slow down the fps rate.')
