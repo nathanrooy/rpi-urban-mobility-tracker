@@ -15,10 +15,11 @@ sudo apt-get install libqtgui4 libqtwebkit4 libqt4-test python3-pyqt5
 sudo apt-get install libatlas-base-dev
 sudo apt-get install libjasper-dev
 ```
-Next, create a virtual environment using `virtualenv` and `python 3.7`
+Next, create and initialize a virtual environment using `virtualenv` and `python 3.7`
 ```
 sudo apt-get install virtualenv
 virtualenv -p python3.7 venv
+source venv/bin/activate
 ```
 
 Now, install cv2
