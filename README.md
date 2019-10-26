@@ -42,6 +42,23 @@ To run while using the Raspberry Pi camera data source run the following:
 ``` 
 python main.py -camera
 ```
-To run the tracker on an image sequence, append the `-imageseq` flag and provide a path to the images. Included in this repo are the first 300 frames from the MOT (<a target="_blank" href="https://motchallenge.net/">Multiple Object Tracking Benchmark</a>) Challenge <a target="_blank" href="https://motchallenge.net/vis/PETS09-S2L1">PETS09-S2L1</a> video.
+To run the tracker on an image sequence, append the `-imageseq` flag followed by a path to the images. Included in this repo are the first 300 frames from the MOT (<a target="_blank" href="https://motchallenge.net/">Multiple Object Tracking Benchmark</a>) Challenge <a target="_blank" href="https://motchallenge.net/vis/PETS09-S2L1">PETS09-S2L1</a> video.
 ```
 python main.py -imageseq data/images/PETS09-S2L1/
+```
+To view the bounding boxes and tracking ability of the system, append the `-display` flag to output images. Note that this will greatly slow down the fps and is only recommended for testing purposes.
+```
+python main.py -imageseq data/images/PETS09-S2L1/ -display
+```
+By default, only the first 10 frames will be processed. To increase or decrease this value, append the `-nframes` flag followed by an integer value.
+```
+python main.py -imageseq data/images/PETS09-S2L1/ -display -nframes 20
+```
+
+
+## Todo
+- [ ] Get Coral usb working
+- [ ] Transfer learn new model
+- [ ] Implement an efficient mobile version of Deep SORT [arxiv]
+- [ ] Finish designing mounting hardware
+- [ ] Create example data processing notebooks
