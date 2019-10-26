@@ -136,36 +136,36 @@ def track_camera(args, interpreter, tracker, labels, colors):
     time.sleep(2.0)
 
     # loop over the frames from the video stream
-    counter = 0
-    while True:
-        print(counter)
+    with open('object_paths.txt', 'w') as out_file:
+        counter = 0
+        while True:
+            print(counter)
 
-        # pull frame from video stream
-        frame = vs.read()
+            # pull frame from video stream
+            frame = vs.read()
 
-        # array to PIL image format
-        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-        pil_img = Image.fromarray(frame)
+            # array to PIL image format
+            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            pil_img = Image.fromarray(frame)
 
-        # get detections
-        new_dets, classes, scores = generate_detections(pil_img, interpreter, 0.65)
+            # get detections
+            new_dets, classes, scores = generate_detections(pil_img, interpreter, 0.65)
 
-        # update tracker
-        trackers = tracker.update(new_dets)
-    
-        # match classes up to detections
-        tracker_labels, tracker_scores = match_detections_to_labels_and_scores(new_dets, trackers, scores, classes, labels)
+            # update tracker
+            trackers = tracker.update(new_dets)
+        
+            # match classes up to detections
+            tracker_labels, tracker_scores = match_detections_to_labels_and_scores(new_dets, trackers, scores, classes, labels)
 
-        # save image output
-        if(args.display):
-            persist_image_output(pil_img, trackers, tracker_labels, tracker_scores, colors, counter)
+            # save image output
+            if(args.display):
+                persist_image_output(pil_img, trackers, tracker_labels, tracker_scores, colors, counter)
 
-        # save object locations
-        for d, tracker_label, tracker_score in zip(trackers, tracker_labels, tracker_scores):
-            print(f'{frame},{d[4]},{d[0]},{d[1]},{d[2]-d[0]},{d[3]-d[1]},{tracker_label},{tracker_score}', file=out_file)
+            # save object locations
+            for d, tracker_label, tracker_score in zip(trackers, tracker_labels, tracker_scores):
+                print(f'{frame},{d[4]},{d[0]},{d[1]},{d[2]-d[0]},{d[3]-d[1]},{tracker_label},{tracker_score}', file=out_file)
 
-        counter += 1
-
+            counter += 1
     pass
     
 
