@@ -63,9 +63,13 @@ In certain instances, you may want to override the default object detection thre
 ```
 python main.py -video data/videos/highway_01.mp4 -display -nframes 100 -threshold 0.4
 ```
+To get the highest fps possible, append the `-tpu` flag to use the Coral USB Accelerator for inferencing.
+```
+python main.py -imageseq data/images/PETS09-S2L1/ -tpu
+```
 
 ## Todo
-- [ ] Get Coral usb working
+- [x] Get Coral usb working
 - [ ] Transfer learn new model
 - [ ] Implement an efficient mobile version of Deep SORT [arxiv]
 - [ ] Finish designing mounting hardware
