@@ -14,6 +14,8 @@ from imutils.video import VideoStream
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 
+import tflite_runtime.interpreter as tflite
+
 #--- FUNCTIONS ----------------------------------------------------------------+
 
 
@@ -40,7 +42,8 @@ def generate_detections(pil_img_obj, interpreter, threshold):
     keep_idx = np.greater(scores, threshold)
     bboxes  = bboxes[keep_idx]
     classes = classes[keep_idx]
-    
+    scores = scores[keep_idx]
+
     # denormalize bounding box dimensions
     if len(keep_idx) > 0:
         bboxes[:,0] = bboxes[:,0] * pil_img_obj.size[1]
@@ -53,17 +56,20 @@ def generate_detections(pil_img_obj, interpreter, threshold):
 
     
 def match_detections_to_labels_and_scores(detections, trackers, scores, classes, labels):
+    
     iou_matrix = np.zeros((len(trackers), len(detections)),dtype=np.float32)
     for d, det in enumerate(detections):
         for t, trk in enumerate(trackers):
-            iou_matrix[t,d] = iou(det,trk)
-            
+            iou_area = iou(det,trk)
+            if np.isnan(iou_area)==False: iou_matrix[t,d]=iou_area
+            else: iou_matrix[t,d]=0
+
     matched_indices = np.array(linear_assignment(-iou_matrix)).T
-    
+
     matched_classes = classes[matched_indices[:,1]]
     matched_labels = [labels[item] for item in matched_classes]
     matched_scores = scores[matched_indices[:,1]]
-    
+
     return matched_labels, matched_scores
 
 
@@ -146,7 +152,7 @@ def track_video(args, interpreter, tracker, labels, colors):
 
             # update tracker
             trackers = tracker.update(new_dets)
-        
+       
             # match classes up to detections
             tracker_labels, tracker_scores = match_detections_to_labels_and_scores(new_dets, trackers, scores, classes, labels)
 
@@ -190,7 +196,7 @@ def track_camera(args, interpreter, tracker, labels, colors):
 
             # update tracker
             trackers = tracker.update(new_dets)
-        
+       
             # match classes up to detections
             tracker_labels, tracker_scores = match_detections_to_labels_and_scores(new_dets, trackers, scores, classes, labels)
 
@@ -212,18 +218,32 @@ def main(args):
     # initialize tflite or coral tpu
     if args.tpu:
         print('TPU = YES')
+        model_path = 'models/tpu/mobilenet_ssd_v2_coco_quant/mobilenet_ssd_v2_coco_quant_postprocess_edgetpu.tflite'
+        model_file, *device = model_path.split('@')
+        edgetpu_shared_lib = 'libedgetpu.so.1'
+        interpreter = tflite.Interpreter(
+                model_path,
+                experimental_delegates=[
+                    tflite.load_delegate(edgetpu_shared_lib,
+                        {'device': device[0]} if device else {})
+                ])
+        interpreter.allocate_tensors()
+ 
+        # parse label map
+        labels = {}
+        #for i, row in enumerate(open('models/tpu/mobilenet_ssd_v2_coco_quant/coco_labels.txt')):
+        for i, row in enumerate(open('models/tflite/coco_ssd_mobilenet_v1_1.0_quant_2018_06_29/labelmap.txt')):
+            labels[i] = row.replace('\n','')
         
     if not args.tpu:
         print('TPU = NO')
-        from tflite_runtime.interpreter import Interpreter
-        
-        interpreter = Interpreter(model_path='models/tflite/coco_ssd_mobilenet_v1_1.0_quant_2018_06_29/detect.tflite')
+        interpreter = tflite.Interpreter(model_path='models/tflite/coco_ssd_mobilenet_v1_1.0_quant_2018_06_29/detect.tflite')
         interpreter.allocate_tensors()
         
-    # parse label map
-    labels = {}
-    for i, row in enumerate(open('models/tflite/coco_ssd_mobilenet_v1_1.0_quant_2018_06_29/labelmap.txt')):
-        labels[i] = row.replace('\n','')
+        # parse label map
+        labels = {}
+        for i, row in enumerate(open('models/tflite/coco_ssd_mobilenet_v1_1.0_quant_2018_06_29/labelmap.txt')):
+            labels[i] = row.replace('\n','')
     
     # display only
     colors = np.random.rand(32, 3)
