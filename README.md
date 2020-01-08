@@ -4,7 +4,7 @@ The Raspberry Pi Urban Mobility Tracker is the simplest way to track and count p
 ## Requirements
 1) Raspberry Pi (<a target="_blank" href="https://www.raspberrypi.org/products/raspberry-pi-4-model-b"/>ideally v4-b</a>)
 2) Raspberry Pi camera (<a target="_blank" href="https://www.raspberrypi.org/products/camera-module-v2/">ideally v2</a>)
-3) Google Coral Accelerator (Not required, but strongly encouraged)
+3) Google Coral Accelerator (<a target="_blank" href="https://coral.ai/products/accelerator">Not required, but strongly encouraged</a>)
 
 ## Install
 
