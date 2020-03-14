@@ -36,7 +36,7 @@ pip install Pillow
 pip install scipy
 pip install scikit-image
 ```
-To run models using TensorFlow Lite, you'll need to install the interpreter which can be found [<a target="_blank" href="https://www.tensorflow.org/lite/guide/python">here</a>].
+To run models using TensorFlow Lite, you'll need to install the interpreter which can be found [<a target="_blank" href="https://www.tensorflow.org/lite/guide/python">here</a>]. For additional help, view the Coral installation docs here: [<a target="_blank" href="https://coral.ai/docs/accelerator/get-started/">here</a>].
 
 ## Usage
 To run while using the Raspberry Pi camera data source run the following:
