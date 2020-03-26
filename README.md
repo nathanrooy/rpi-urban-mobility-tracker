@@ -47,7 +47,7 @@ Once the model and labels have been downloaded, simply use the `model_path` and 
 ```sh
 python main.py -camera -model_path pednet_20200326_tflite_graph.tflite label_path labels.txt
 ```
-When using the `-tpu` option, don't forget to update the model paths accordingly.
+You can always just change the path within `main.py` too. Lastly, when using the `-tpu` option, don't forget to update the model paths accordingly.
 
 ## Usage
 To run while using the Raspberry Pi camera data source run the following:
