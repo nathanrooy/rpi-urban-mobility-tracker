@@ -162,7 +162,7 @@ def track_video(args, interpreter, tracker, labels, colors):
 
             # save object locations
             for d, tracker_label, tracker_score in zip(trackers, tracker_labels, tracker_scores):
-                print(f'{frame},{d[4]},{d[0]},{d[1]},{d[2]-d[0]},{d[3]-d[1]},{tracker_label},{tracker_score}', file=out_file)
+                print(f'{counter},{d[4]},{d[0]},{d[1]},{d[2]-d[0]},{d[3]-d[1]},{tracker_label},{tracker_score}', file=out_file)
 
             counter += 1
             
@@ -206,7 +206,7 @@ def track_camera(args, interpreter, tracker, labels, colors):
 
             # save object locations
             for d, tracker_label, tracker_score in zip(trackers, tracker_labels, tracker_scores):
-                print(f'{frame},{d[4]},{d[0]},{d[1]},{d[2]-d[0]},{d[3]-d[1]},{tracker_label},{tracker_score}', file=out_file)
+                print(f'{counter},{d[4]},{d[0]},{d[1]},{d[2]-d[0]},{d[3]-d[1]},{tracker_label},{tracker_score}', file=out_file)
 
             counter += 1
     pass
