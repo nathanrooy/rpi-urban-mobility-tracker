@@ -1,5 +1,6 @@
 #--- IMPORT DEPENDENCIES ------------------------------------------------------+
 
+import time
 import argparse
 from sort import *
 
@@ -17,6 +18,13 @@ from matplotlib.patches import Rectangle
 import tflite_runtime.interpreter as tflite
 
 #--- FUNCTIONS ----------------------------------------------------------------+
+
+
+def parse_label_map(path_to_labelmap):
+    labels = {}
+    for i, row in enumerate(open('models/tflite/coco_ssd_mobilenet_v1_1.0_quant_2018_06_29/labelmap.txt')):
+        labels[i] = row.replace('\n','')
+    return labels
 
 
 def generate_detections(pil_img_obj, interpreter, threshold):
@@ -186,6 +194,7 @@ def track_camera(args, interpreter, tracker, labels, colors):
 
             # pull frame from video stream
             frame = vs.read()
+            f_time = int(time.time())
 
             # array to PIL image format
             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -206,7 +215,7 @@ def track_camera(args, interpreter, tracker, labels, colors):
 
             # save object locations
             for d, tracker_label, tracker_score in zip(trackers, tracker_labels, tracker_scores):
-                print(f'{counter},{d[4]},{d[0]},{d[1]},{d[2]-d[0]},{d[3]-d[1]},{tracker_label},{tracker_score}', file=out_file)
+                print(f'{counter},{f_time},{d[4]},{d[0]},{d[1]},{d[2]-d[0]},{d[3]-d[1]},{tracker_label},{tracker_score}', file=out_file)
 
             counter += 1
     pass
@@ -214,11 +223,21 @@ def track_camera(args, interpreter, tracker, labels, colors):
 
 
 def main(args):
+    print('> INITIALIZING UMT...')
 
-    # initialize tflite or coral tpu
+    # initialize coral tpu model
     if args.tpu:
-        print('TPU = YES')
-        model_path = 'models/tpu/mobilenet_ssd_v2_coco_quant/mobilenet_ssd_v2_coco_quant_postprocess_edgetpu.tflite'
+        print('   > TPU = TRUE')
+        
+        if args.model_path:
+            model_path = args.model_path
+            print('   > CUSTOM DETECTOR = TRUE')
+            print(f'      > DETECTOR PATH = {model_path}')
+        	
+        else:
+        	model_path = 'models/tpu/mobilenet_ssd_v2_coco_quant/mobilenet_ssd_v2_coco_quant_postprocess_edgetpu.tflite'
+        	print('   > CUSTOM DETECTOR = FALSE')
+        
         model_file, *device = model_path.split('@')
         edgetpu_shared_lib = 'libedgetpu.so.1'
         interpreter = tflite.Interpreter(
@@ -228,22 +247,27 @@ def main(args):
                         {'device': device[0]} if device else {})
                 ])
         interpreter.allocate_tensors()
- 
-        # parse label map
-        labels = {}
-        #for i, row in enumerate(open('models/tpu/mobilenet_ssd_v2_coco_quant/coco_labels.txt')):
-        for i, row in enumerate(open('models/tflite/coco_ssd_mobilenet_v1_1.0_quant_2018_06_29/labelmap.txt')):
-            labels[i] = row.replace('\n','')
+
         
+    # initialize tflite model
     if not args.tpu:
-        print('TPU = NO')
-        interpreter = tflite.Interpreter(model_path='models/tflite/coco_ssd_mobilenet_v1_1.0_quant_2018_06_29/detect.tflite')
+        print('   > TPU = FALSE')
+        
+        if args.model_path:
+            model_path = args.model_path
+            print('   > CUSTOM DETECTOR = TRUE')
+            print(f'      > DETECTOR PATH = {model_path}')
+        	
+        else:
+        	print('   > CUSTOM DETECTOR = FALSE')
+        	model_path = 'models/tflite/coco_ssd_mobilenet_v1_1.0_quant_2018_06_29/detect.tflite'
+        
+        interpreter = tflite.Interpreter(model_path=model_path)
         interpreter.allocate_tensors()
         
-        # parse label map
-        labels = {}
-        for i, row in enumerate(open('models/tflite/coco_ssd_mobilenet_v1_1.0_quant_2018_06_29/labelmap.txt')):
-            labels[i] = row.replace('\n','')
+    # parse label map
+    if args.label_map_path: labels = parse_label_map(args.label_map_path)
+    else: labels = parse_label_map("models/tflite/coco_ssd_mobilenet_v1_1.0_quant_2018_06_29/labelmap.txt")
     
     # display only
     colors = np.random.rand(32, 3)
@@ -276,6 +300,8 @@ if __name__ == '__main__':
     
     # parse arguments
     parser = argparse.ArgumentParser(description='--- Raspbery Pi Urban Mobility Tracker ---')
+    parser.add_argument('-modelpath', dest='model_path', type=str, required=False, help='specify path of a custom detection model')
+    parser.add_argument('-labelmap', dest='label_map_path', type=str, required=False, help='specify the label map text file')
     parser.add_argument('-imageseq', dest='image_path', type=str, required=False, help='specify an image sequence')
     parser.add_argument('-video', dest='video_path', type=str, required=False, help='specify video file')
     parser.add_argument('-camera', dest='camera', default=False, action='store_true', help='specify this when using the rpi camera as the input')
@@ -284,9 +310,11 @@ if __name__ == '__main__':
     parser.add_argument('-nframes', dest='nframes', type=int, required=False, default=10, help='specify nunber of frames to process')
     parser.add_argument('-display', dest='display', required=False, default=False, action='store_true', help='add this flag to output images from tracker. note, that this will greatly slow down the fps rate.')
     args = parser.parse_args()
+
+    # basic checks
+    if args.model_path: assert args.label_map_path, "when specifying a custom model, you must also specify a label map path using: '-labelmap <path to labelmap.txt>'"
     
     # begin tracking
     main(args)
     
-
 #--- END ----------------------------------------------------------------------+
