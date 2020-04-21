@@ -17,12 +17,19 @@ from matplotlib.patches import Rectangle
 
 import tflite_runtime.interpreter as tflite
 
+#--- CONSTANTS ----------------------------------------------------------------+
+
+DEFAULT_LABEL_MAP_PATH = "models/tflite/coco_ssd_mobilenet_v1_1.0_quant_2018_06_29/labelmap.txt"
+
 #--- FUNCTIONS ----------------------------------------------------------------+
 
 
-def parse_label_map(path_to_labelmap):
+def parse_label_map(agrs):
+    if args.label_map_path == DEFAULT_LABEL_MAP_PATH: print('   > CUSTOM LABEL MAP = FALSE')
+    else: print(f'   > CUSTOM LABEL MAP = TRUE ({args.label_map_path})')
+
     labels = {}
-    for i, row in enumerate(open(path_to_labelmap)):
+    for i, row in enumerate(open(args.label_map_path)):
         labels[i] = row.replace('\n','')
     return labels
 
@@ -222,8 +229,7 @@ def track_camera(args, interpreter, tracker, labels, colors):
     
 
 
-def main(args):
-    print('> INITIALIZING UMT...')
+def initialize_detector(args):
 
     # initialize coral tpu model
     if args.tpu:
@@ -238,7 +244,7 @@ def main(args):
         	model_path = 'models/tpu/mobilenet_ssd_v2_coco_quant/mobilenet_ssd_v2_coco_quant_postprocess_edgetpu.tflite'
         	print('   > CUSTOM DETECTOR = FALSE')
         
-        model_file, *device = model_path.split('@')
+        _, *device = model_path.split('@')
         edgetpu_shared_lib = 'libedgetpu.so.1'
         interpreter = tflite.Interpreter(
                 model_path,
@@ -248,9 +254,8 @@ def main(args):
                 ])
         interpreter.allocate_tensors()
 
-        
     # initialize tflite model
-    if not args.tpu:
+    else:
         print('   > TPU = FALSE')
         
         if args.model_path:
@@ -264,6 +269,15 @@ def main(args):
         
         interpreter = tflite.Interpreter(model_path=model_path)
         interpreter.allocate_tensors()
+
+    return interpreter
+    
+
+def main(args):
+    print('> INITIALIZING UMT...')
+
+    # initialize detector
+    interpreter = initialize_detector(args)
         
     # parse label map
     if args.label_map_path: labels = parse_label_map(args.label_map_path)
@@ -278,6 +292,8 @@ def main(args):
 
     # create instance of the SORT tracker
     tracker = Sort()
+
+    print('\n> TRACKING...')
     
     # track objects from video file
     if args.video_path:
@@ -301,7 +317,7 @@ if __name__ == '__main__':
     # parse arguments
     parser = argparse.ArgumentParser(description='--- Raspbery Pi Urban Mobility Tracker ---')
     parser.add_argument('-modelpath', dest='model_path', type=str, required=False, help='specify path of a custom detection model')
-    parser.add_argument('-labelmap', dest='label_map_path', type=str, required=False, help='specify the label map text file')
+    parser.add_argument('-labelmap', dest='label_map_path', default=DEFAULT_LABEL_MAP_PATH, type=str, required=False, help='specify the label map text file')
     parser.add_argument('-imageseq', dest='image_path', type=str, required=False, help='specify an image sequence')
     parser.add_argument('-video', dest='video_path', type=str, required=False, help='specify video file')
     parser.add_argument('-camera', dest='camera', default=False, action='store_true', help='specify this when using the rpi camera as the input')
