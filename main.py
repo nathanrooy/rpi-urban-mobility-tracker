@@ -22,7 +22,7 @@ import tflite_runtime.interpreter as tflite
 
 def parse_label_map(path_to_labelmap):
     labels = {}
-    for i, row in enumerate(open('models/tflite/coco_ssd_mobilenet_v1_1.0_quant_2018_06_29/labelmap.txt')):
+    for i, row in enumerate(open(path_to_labelmap)):
         labels[i] = row.replace('\n','')
     return labels
 
