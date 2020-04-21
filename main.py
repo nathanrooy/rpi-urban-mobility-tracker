@@ -146,8 +146,6 @@ def track_image_seq(args, interpreter, tracker, labels, colors):
     
 def track_video(args, interpreter, tracker, labels, colors):
 
-    assert os.path.exists(args.video_path)==True, "can't find the specified video file..."
-    
     with open('object_paths.txt', 'w') as out_file:
     
         counter = 0
@@ -329,7 +327,10 @@ if __name__ == '__main__':
 
     # basic checks
     if args.model_path: assert args.label_map_path, "when specifying a custom model, you must also specify a label map path using: '-labelmap <path to labelmap.txt>'"
-    
+    if args.model_path: assert os.path.exists(args.model_path)==True, "can't find the specified model..."
+    if args.label_map_path: assert os.path.exists(args.label_map_path)==True, "can't find the specified label map..."
+    if args.video_path: assert os.path.exists(args.video_path)==True, "can't find the specified video file..."
+
     # begin tracking
     main(args)
     
