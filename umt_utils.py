@@ -69,10 +69,12 @@ def video_frame_gen(args):
 
 def persist_image_output(pil_img, trackers, tracker_labels, tracker_scores, COLORS, frame):
 
-    _, ax = plt.subplots(figsize=(10,10))
+    fig, ax = plt.subplots(figsize=(10,10))
+    ax.set_axis_off()
+    fig.add_axes(ax)
+
     plt.imshow(pil_img)
     ax.set_aspect('equal')
-    ax.set_title(' Tracked Targets')
 
     for d, label, score in zip(trackers, tracker_labels, tracker_scores):
         d = d.astype(np.int32)
@@ -81,7 +83,7 @@ def persist_image_output(pil_img, trackers, tracker_labels, tracker_scores, COLO
         rect = Rectangle((d[0],d[1]),d[2]-d[0],d[3]-d[1], fill=False, lw=2, ec=COLORS[d[4]%32,:])
         ax.add_patch(rect)
         
-    plt.savefig(f'output/frame_{frame}.jpg')
+    plt.savefig(f'output/frame_{frame}.jpg', bbox_inches='tight', pad_inches=0)
 
     pass
 
