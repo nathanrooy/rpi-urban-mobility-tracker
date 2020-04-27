@@ -2,7 +2,7 @@
 The Raspberry Pi Urban Mobility Tracker is the simplest way to track and count pedestrians, cyclists, scooters, and vehicles. For more information, see the original blog post [<a target="_blank" href="https://nathanrooy.github.io/posts/2019-02-06/raspberry-pi-deep-learning-traffic-tracker/">here</a>].
 
 <span>
-  <img src='docs/vid01.webp'>
+  <img src='docs/vid05.webp'>
   <img src='docs/vid02.webp'>
 </span>
 <span>
