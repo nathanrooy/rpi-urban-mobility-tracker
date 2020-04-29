@@ -182,10 +182,10 @@ def generate_detections(pil_img_obj, interpreter, threshold):
     num = np.squeeze(interpreter.get_tensor(interpreter.get_output_details()[3]['index']))
     
     # keep detections above specified threshold
-    keep_idx = np.greater(scores, threshold)
-    bboxes  = bboxes[keep_idx]
-    classes = classes[keep_idx]
-    scores = scores[keep_idx]
+    keep_idx = np.less(scores[np.greater(scores, threshold)], 1)
+    bboxes  = bboxes[:keep_idx.shape[0]][keep_idx]
+    classes = classes[:keep_idx.shape[0]][keep_idx]
+    scores = scores[:keep_idx.shape[0]][keep_idx]
 
     # denormalize bounding box dimensions
     if len(keep_idx) > 0:
