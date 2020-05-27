@@ -68,7 +68,7 @@ git clone https://github.com/nathanrooy/ped-net
 ```
 Once the model and labels have been downloaded, simply use the `model_path` and `label_path` flags to specify a non-default model setup. As an example:
 ```sh
-python main.py -camera -model_path pednet_20200326_tflite_graph.tflite label_path labels.txt
+umt -camera -model_path pednet_20200326_tflite_graph.tflite label_path labels.txt
 ```
 
 ## Usage
