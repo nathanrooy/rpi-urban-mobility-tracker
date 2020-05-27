@@ -45,7 +45,16 @@ pip install Pillow
 pip install scipy
 pip install scikit-image
 ```
-To run models using TensorFlow Lite, you'll need to install the interpreter which can be found [<a target="_blank" href="https://www.tensorflow.org/lite/guide/python">here</a>]. For additional help, view the Coral installation docs here: [<a target="_blank" href="https://coral.ai/docs/accelerator/get-started/">here</a>].
+To run models using TensorFlow Lite, you'll need to install the interpreter which can be found [<a target="_blank" href="https://www.tensorflow.org/lite/guide/python">here</a>]. If your on a linux (x86-64) machine running Python 3.7, it's simply the following:
+
+```sh
+pip3 install https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp37-cp37m-linux_x86_64.whl
+```
+If you're planning using a Raspberry Pi running Raspbian Buster make sure to use the Python wheel built for Linux (ARM 64) and Python 3.7 which can achieved with the following:
+```sh
+pip3 install https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp37-cp37m-linux_armv7l.whl
+```
+In order to utilize the Coral TPU, the Edge TPU runtime and TensorFlow Lite interpreter library must be installed. The TensorFlow Lite installation is the same as above, and the Edge TPU can be installed by following the directions [<a target="_blank" href="https://coral.ai/docs/accelerator/get-started/#requirements">here</a>].
 
 ## Model Choice
 The default deep learning model is the MobileNet v1 which has been trained on the <a target="_blank" href="http://cocodataset.org">COCO dataset</a> and quantized for faster performance on edge deployments. Another good model choice is <a target="_blank" href="https://github.com/nathanrooy/ped-net/blob/master/README.md">PedNet</a> which is also a quantized MobileNet v1 however, it's been optimized specifically for pedestrians, cyclsts, and vehicles. To use PedNet, simply download it from its repo here: https://github.com/nathanrooy/ped-net or clone it.
