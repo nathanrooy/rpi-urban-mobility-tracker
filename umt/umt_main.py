@@ -76,18 +76,21 @@ def main():
             # get detections
             new_dets, classes, scores = generate_detections(pil_img, interpreter, args.threshold)
 
-            # update tracker
-            trackers = tracker.update(new_dets)
-        
-            # match classes up to detections
-            tracker_labels, tracker_scores = match_detections_to_labels_and_scores(new_dets, trackers, scores, classes, labels)
+            # proceed to updating state
+            if new_dets.shape[0] > 0:
 
-            # save image output
-            if(args.display): persist_image_output(pil_img, trackers, tracker_labels, tracker_scores, COLORS, i)
+                # update tracker
+                trackers = tracker.update(new_dets)
             
-            # save object locations
-            for d, tracker_label, tracker_score in zip(trackers, tracker_labels, tracker_scores):
-                print(f'{i},{f_time},{d[4]},{d[0]},{d[1]},{d[2]-d[0]},{d[3]-d[1]},{tracker_label},{tracker_score}', file=out_file)
+                # match classes up to detections
+                tracker_labels, tracker_scores = match_detections_to_labels_and_scores(new_dets, trackers, scores, classes, labels)
+
+                # save image output
+                if(args.display): persist_image_output(pil_img, trackers, tracker_labels, tracker_scores, COLORS, i)
+                
+                # save object locations
+                for d, tracker_label, tracker_score in zip(trackers, tracker_labels, tracker_scores):
+                    print(f'{i},{f_time},{d[4]},{d[0]},{d[1]},{d[2]-d[0]},{d[3]-d[1]},{tracker_label},{tracker_score}', file=out_file)
      
     pass
 

@@ -198,7 +198,7 @@ def generate_detections(pil_img_obj, interpreter, threshold):
         bboxes[:,3] = bboxes[:,3] * pil_img_obj.size[0]
         
         return np.hstack((bboxes[:,[1,0,3,2]], np.full((bboxes.shape[0], 1), 50))).astype(np.int16), classes, scores
-    else: return []
+    else: return np.array([]), np.array([]), np.array([])
 
 
 def parse_label_map(args, DEFAULT_LABEL_MAP_PATH):
