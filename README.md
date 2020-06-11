@@ -66,9 +66,9 @@ The default deep learning model is the MobileNet v1 which has been trained on th
 ```sh
 git clone https://github.com/nathanrooy/ped-net
 ```
-Once the model and labels have been downloaded, simply use the `model_path` and `label_path` flags to specify a non-default model setup. As an example:
+Once the model and labels have been downloaded, simply use the `modelpath` and `labelmap` flags to specify a non-default model setup. As an example:
 ```sh
-umt -camera -model_path pednet_20200326_tflite_graph.tflite label_path labels.txt
+umt -camera -modelpath pednet_20200326_tflite_graph.tflite -labelmap labels.txt
 ```
 
 ## Usage
