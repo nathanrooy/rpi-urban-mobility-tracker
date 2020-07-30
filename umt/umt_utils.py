@@ -84,7 +84,8 @@ def persist_image_output(pil_img, trackers, tracker_labels, tracker_scores, COLO
         ax.add_patch(rect)
         
     plt.savefig(f'output/frame_{frame}.jpg', bbox_inches='tight', pad_inches=0)
-
+    plt.close()
+    
     pass
 
 
