@@ -1,4 +1,4 @@
-name: CI Ubuntu Latest
+name: Ubuntu Latest + Py3.7
 
 on:
   push:
