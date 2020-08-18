@@ -42,6 +42,7 @@ jobs:
         pip install scipy
         pip install scikit-image
         pip install https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp37-cp37m-linux_x86_64.whl
+        pip install git+https://github.com/nathanrooy/rpi-urban-mobility-tracker
     - name: Test with unittest
       run: python -m unittest tests/unit/test_utils.py
     - name: Lint with flake8
