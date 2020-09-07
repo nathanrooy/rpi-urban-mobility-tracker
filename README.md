@@ -13,11 +13,45 @@ The Raspberry Pi Urban Mobility Tracker is the simplest way to track and count p
 </span>
 
 ## Hardware
+<b>Primary Components</b>
 1) Raspberry Pi (<a target="_blank" href="https://www.raspberrypi.org/products/raspberry-pi-4-model-b"/>ideally v4-b</a>)
 2) Raspberry Pi camera (<a target="_blank" href="https://www.raspberrypi.org/products/camera-module-v2/">ideally v2</a>)
 3) Google Coral Accelerator (<a target="_blank" href="https://coral.ai/products/accelerator">Not required, but strongly encouraged</a>)
 
+<b>Secondary Components</b>
+1) Ballhead mount: https://www.amazon.com/gp/product/B00DA38C3G
+2) Clear lens: https://www.amazon.com/gp/product/B079JW114G
+3) Weatherproof enclosure: https://www.amazon.com/gp/product/B005UPAN0W
+4) 30000mAh battery: https://www.amazon.com/gp/product/B01M5LKV4T
 
+<b>Notes</b>
+- The mounts located in `geometry/` are currently represented as `stl` files which are 3d printer ready. I don't currently have a 3d printer so I used the crowd sourced printing service <a target="_blank" href="https://printathing.com/">https://printathing.com/<a> which yielded great results (kind of a sales pitch, but not really. I just like the service).
+- The original <a target="_blank" href="https://www.freecadweb.org/">FreeCAD</a> file is also included just in case you want to modify the geometry.
+- The only cutting necessary is through the plastic case to allow for the lens. This joint should then be sealed using silicone caulk to prevent any moisture from entering.
+- All the secondary components listed are just suggestions which worked well for my build. Feel free to use what ever you want.
+
+<table>
+  <tr>
+    <td>3D printed mounts</td>
+    <td>mounts with attached hardware</td>
+  </tr>
+  <tr>
+    <td><img src='docs/DSCF1478.jpg' height=400></td>
+    <td><img src='docs/DSCF1480.jpg' height=400></td>
+  </tr>
+ </table>
+ 
+ <table>
+  <tr>
+    <td>As seen from enclosure</td>
+    <td>Front</td>
+  </tr>
+  <tr>
+    <td><img src='docs/DSCF1494.jpg' height=400></td>
+    <td><img src='docs/DSCF1490.jpg' height=400></td>
+  </tr>
+ </table>
+ 
 ## Install
 First install the required dependencies for cv2
 ```sh
