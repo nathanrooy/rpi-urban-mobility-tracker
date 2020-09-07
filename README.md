@@ -36,8 +36,8 @@ The Raspberry Pi Urban Mobility Tracker is the simplest way to track and count p
     <td>mounts with attached hardware</td>
   </tr>
   <tr>
-    <td><img src='docs/DSCF1478.jpg' height=400></td>
-    <td><img src='docs/DSCF1480.jpg' height=400></td>
+    <td><img src='docs/DSCF1478.jpg' height=300></td>
+    <td><img src='docs/DSCF1480.jpg' height=300></td>
   </tr>
  </table>
  
@@ -47,8 +47,8 @@ The Raspberry Pi Urban Mobility Tracker is the simplest way to track and count p
     <td>Front (closed)</td>
   </tr>
   <tr>
-    <td><img src='docs/DSCF1494.jpg' height=400></td>
-    <td><img src='docs/DSCF1490.jpg' height=400></td>
+    <td><img src='docs/DSCF1494.jpg' height=300></td>
+    <td><img src='docs/DSCF1490.jpg' height=300></td>
   </tr>
  </table>
  
