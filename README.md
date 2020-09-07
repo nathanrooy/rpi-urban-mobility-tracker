@@ -43,8 +43,8 @@ The Raspberry Pi Urban Mobility Tracker is the simplest way to track and count p
  
  <table>
   <tr>
-    <td>As seen from enclosure</td>
-    <td>Front</td>
+    <td>Final setup (open)</td>
+    <td>Front (closed)</td>
   </tr>
   <tr>
     <td><img src='docs/DSCF1494.jpg' height=400></td>
