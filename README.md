@@ -67,19 +67,17 @@ virtualenv -p python3.7 venv
 source venv/bin/activate
 ```
 
-Now, install cv2
-```sh
-sudo apt-get install python-opencv
-```
-Finally, install the required python libraries
+Now, install the required python libraries
 ```sh
 pip install filterpy
 pip install imutils
 pip install matplotlib
 pip install numpy
-pip install Pillow
+pip install pillow
+pip isntall python-opencv
 pip install scipy
 pip install scikit-image
+pip install tensorflow
 ```
 To run models using TensorFlow Lite, you'll need to install the interpreter which can be found [<a target="_blank" href="https://www.tensorflow.org/lite/guide/python">here</a>]. If your on a linux (x86-64) machine running Python 3.7, it's simply the following:
 
