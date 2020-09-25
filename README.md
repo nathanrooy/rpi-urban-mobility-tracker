@@ -113,13 +113,17 @@ To run the tracker on an image sequence, append the `-imageseq` flag followed by
 ```sh
 umt -imageseq data/images/PETS09-S2L1/
 ```
-To view the bounding boxes and tracking ability of the system, append the `-display` flag to output images. Note that this will greatly slow down the fps and is only recommended for testing purposes.
+To view the bounding boxes and tracking ability of the system, append the `-display` flag to view a live feed. Note that this will greatly slow down the fps and is only recommended for testing purposes.
 ```sh
 umt -imageseq data/images/PETS09-S2L1/ -display
 ```
 By default, only the first 10 frames will be processed. To increase or decrease this value, append the `-nframes` flag followed by an integer value.
 ```sh
 umt -imageseq data/images/PETS09-S2L1/ -display -nframes 20
+```
+To persist the image frames and detections, use the `-save` flag. Saved images are then available in the `output/` directory.
+```sh
+umt -imageseq data/images/PETS09-S2L1/ -save -nframes 20
 ```
 To run the tracker using a video file input, append the `-video` flag followed by a path to the video file. Included in this repo are two video clips of vehicle traffic.
 ```sh
