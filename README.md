@@ -62,8 +62,8 @@ sudo apt-get install libjasper-dev
 Next, create and initialize a virtual environment using `virtualenv` and `python 3.7`
 ```sh
 sudo apt-get install virtualenv
-virtualenv -p python3.7 venv
-source venv/bin/activate
+virtualenv -p python3.7 venv_umt
+source venv_umt/bin/activate
 ```
 
 Now, install the required python libraries
