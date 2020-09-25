@@ -3,8 +3,6 @@ import tflite_runtime.interpreter as tflite
 from PIL import Image
 import numpy as np
 
-from umt.sort import *
-
 import cv2
 from scipy.spatial.distance import cosine
 
@@ -14,10 +12,18 @@ from imutils.video import VideoStream
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 
+# deep sort
+from umt.deep_sort import generate_detections as gd
+from umt.deep_sort.detection import Detection
+from umt.deep_sort.preprocessing import non_max_suppression
 
-def plot_colors():
-    return np.random.rand(32, 3)
+# constants
+nms_max_overlap = 1.0
 
+# initialize an instance of the deep-sort tracker
+w_path = os.path.join(os.path.dirname(__file__), 'deep_sort/mars-small128.pb')
+encoder = gd.create_box_encoder(w_path, batch_size=1)
+    
 
 def camera_frame_gen(args):
 
@@ -65,28 +71,6 @@ def video_frame_gen(args):
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
         yield Image.fromarray(frame)
-
-
-def persist_image_output(pil_img, trackers, tracker_labels, tracker_scores, COLORS, frame):
-
-    fig, ax = plt.subplots(figsize=(10,10))
-    ax.set_axis_off()
-    fig.add_axes(ax)
-
-    plt.imshow(pil_img)
-    ax.set_aspect('equal')
-
-    for d, label, score in zip(trackers, tracker_labels, tracker_scores):
-        d = d.astype(np.int32)
-        plt.text(d[0], d[1] - 20, f'{label} (#{d[4]%32})', color=COLORS[d[4]%32,:], fontsize=10, fontweight='bold')
-        plt.text(d[0], d[1] -  5, f'{score:0.4f}', color=COLORS[d[4]%32,:], fontsize=10, fontweight='bold')
-        rect = Rectangle((d[0],d[1]),d[2]-d[0],d[3]-d[1], fill=False, lw=2, ec=COLORS[d[4]%32,:])
-        ax.add_patch(rect)
-        
-    plt.savefig(f'output/frame_{frame}.jpg', bbox_inches='tight', pad_inches=0)
-    plt.close()
-    
-    pass
 
 
 def initialize_img_source(args):
@@ -148,24 +132,6 @@ def initialize_detector(args):
     return interpreter
 
 
-def match_detections_to_labels_and_scores(detections, trackers, scores, classes, labels):
-    
-    iou_matrix = np.zeros((len(trackers), len(detections)),dtype=np.float32)
-    for d, det in enumerate(detections):
-        for t, trk in enumerate(trackers):
-            iou_area = iou(det,trk)
-            if np.isnan(iou_area)==False: iou_matrix[t,d]=iou_area
-            else: iou_matrix[t,d]=0
-
-    matched_indices = np.array(linear_assignment(-iou_matrix)).T
-
-    matched_classes = classes[matched_indices[:,1]]
-    matched_labels = [labels[item] for item in matched_classes]
-    matched_scores = scores[matched_indices[:,1]]
-
-    return matched_labels, matched_scores
-
-
 def generate_detections(pil_img_obj, interpreter, threshold):
     
     # resize image to match model input dimensions
@@ -190,6 +156,12 @@ def generate_detections(pil_img_obj, interpreter, threshold):
     bboxes  = bboxes[:keep_idx.shape[0]][keep_idx]
     classes = classes[:keep_idx.shape[0]][keep_idx]
     scores = scores[:keep_idx.shape[0]][keep_idx]
+    
+    # keep detections of specified classes
+    #
+    #
+	#...
+	
 
     # denormalize bounding box dimensions
     if len(keep_idx) > 0:
@@ -197,9 +169,29 @@ def generate_detections(pil_img_obj, interpreter, threshold):
         bboxes[:,1] = bboxes[:,1] * pil_img_obj.size[0]
         bboxes[:,2] = bboxes[:,2] * pil_img_obj.size[1]
         bboxes[:,3] = bboxes[:,3] * pil_img_obj.size[0]
-        
-        return np.hstack((bboxes[:,[1,0,3,2]], np.full((bboxes.shape[0], 1), 50))).astype(np.int16), classes, scores
-    else: return np.array([]), np.array([]), np.array([])
+    
+	# convert bboxes from [ymin, xmin, ymax, xmax] -> [xmin, ymin, width, height]
+    for box in bboxes:
+        xmin = int(box[1])
+        ymin = int(box[0])
+        w = int(box[3]) - xmin
+        h = int(box[2]) - ymin
+        box[0], box[1], box[2], box[3] = xmin, ymin, w, h
+		
+    # generate features for deepsort
+    features = encoder(np.array(pil_img_obj), bboxes)
+
+    # munge into deep sort detection objects
+    detections = [Detection(bbox, score, class_name, feature) for bbox, score, class_name, feature in zip(bboxes, scores, classes, features)]
+
+	# run non-maximum suppression
+	# borrowed from: https://github.com/nwojke/deep_sort/blob/master/deep_sort_app.py#L174
+    boxes = np.array([d.tlwh for d in detections])
+    scores = np.array([d.confidence for d in detections])
+    indices = non_max_suppression(boxes, nms_max_overlap, scores)
+    detections = [detections[i] for i in indices]
+    
+    return detections
 
 
 def parse_label_map(args, DEFAULT_LABEL_MAP_PATH):
