@@ -1,5 +1,4 @@
-# Raspberry Pi Urban Mobility Tracker
-[<img src="https://github.com/nathanrooy/rpi-urban-mobility-tracker/workflows/Ubuntu%20Latest%20+%20Python%203.7/badge.svg">](https://github.com/nathanrooy/rpi-urban-mobility-tracker/actions?query=workflow%3A%22Ubuntu+Latest+%2B+Python+3.7%22)
+# Raspberry Pi Urban Mobility Tracker (DeepSORT + MobileNet)
 
 The Raspberry Pi Urban Mobility Tracker is the simplest way to track and count pedestrians, cyclists, scooters, and vehicles. For more information, see the original blog post [<a target="_blank" href="https://nathanrooy.github.io/posts/2019-02-06/raspberry-pi-deep-learning-traffic-tracker/">here</a>].
 
@@ -144,13 +143,27 @@ umt -imageseq data/images/PETS09-S2L1/ -tpu
 
 ## References
 ```
-@inproceedings{Bewley2016_sort,
-  author={Bewley, Alex and Ge, Zongyuan and Ott, Lionel and Ramos, Fabio and Upcroft, Ben},
-  booktitle={2016 IEEE International Conference on Image Processing (ICIP)},
-  title={Simple online and realtime tracking},
-  year={2016},
-  pages={3464-3468},
-  keywords={Benchmark testing;Complexity theory;Detectors;Kalman filters;Target tracking;Visualization;Computer Vision;Data Association;Detection;Multiple Object Tracking},
-  doi={10.1109/ICIP.2016.7533003}
+@inproceedings{Wojke2017simple,
+  title={Simple Online and Realtime Tracking with a Deep Association Metric},
+  author={Wojke, Nicolai and Bewley, Alex and Paulus, Dietrich},
+  booktitle={2017 IEEE International Conference on Image Processing (ICIP)},
+  year={2017},
+  pages={3645--3649},
+  organization={IEEE},
+  doi={10.1109/ICIP.2017.8296962}
 }
+
+@inproceedings{Wojke2018deep,
+  title={Deep Cosine Metric Learning for Person Re-identification},
+  author={Wojke, Nicolai and Bewley, Alex},
+  booktitle={2018 IEEE Winter Conference on Applications of Computer Vision (WACV)},
+  year={2018},
+  pages={748--756},
+  organization={IEEE},
+  doi={10.1109/WACV.2018.00087}
+}
+```
+Additionally, the following repo was referenced during the DeepSORT implementation:
+```
+https://github.com/theAIGuysCode/yolov4-deepsort
 ```
