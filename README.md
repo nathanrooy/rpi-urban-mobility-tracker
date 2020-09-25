@@ -134,13 +134,6 @@ To get the highest fps possible, append the `-tpu` flag to use the Coral USB Acc
 umt -imageseq data/images/PETS09-S2L1/ -tpu
 ```
 
-## Todo
-- [x] Get Coral usb working
-- [x] Create pedestrian specific detection model -> https://github.com/nathanrooy/ped-net
-- [ ] Implement an efficient mobile version of Deep SORT [arxiv]
-- [ ] Finish designing mounting hardware
-- [ ] Create example data processing notebooks
-
 ## References
 ```
 @inproceedings{Wojke2017simple,
