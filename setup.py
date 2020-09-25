@@ -38,7 +38,8 @@ setup(
     		'models/tflite/coco_ssd_mobilenet_v1_1.0_quant_2018_06_29/labelmap.txt',
     		'models/tflite/coco_ssd_mobilenet_v1_1.0_quant_2018_06_29/detect.tflite',
     		'models/tpu/mobilenet_ssd_v2_coco_quant/coco_labels.txt',
-    		'models/tpu/mobilenet_ssd_v2_coco_quant/mobilenet_ssd_v2_coco_quant_postprocess_edgetpu.tflite'
+    		'models/tpu/mobilenet_ssd_v2_coco_quant/mobilenet_ssd_v2_coco_quant_postprocess_edgetpu.tflite',
+		'deep_sort/*'
     		]
     },
 )
