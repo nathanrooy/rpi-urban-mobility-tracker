@@ -24,9 +24,11 @@ setup(
 		'imutils',
 		'matplotlib',
 		'numpy',
-		'Pillow',
+		'pillow',
+	    	'opencv-python',
 		'scipy',
-		'scikit-image'
+		'scikit-image',
+	    	'tensorflow'
     ],
     entry_points={
         'console_scripts': [
