@@ -78,7 +78,7 @@ pip install scipy
 pip install scikit-image
 pip install tensorflow
 ```
-To run models using TensorFlow Lite, you'll need to install the interpreter which can be found [<a target="_blank" href="https://www.tensorflow.org/lite/guide/python">here</a>]. If your on a linux (x86-64) machine running Python 3.7, it's simply the following:
+To run models using TensorFlow Lite, you'll need to install the interpreter which can be found [<a target="_blank" href="https://www.tensorflow.org/lite/guide/python#install_just_the_tensorflow_lite_interpreter">here</a>]. If your on a linux (x86-64) machine running Python 3.7, it's simply the following:
 
 ```sh
 pip3 install https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp37-cp37m-linux_x86_64.whl
