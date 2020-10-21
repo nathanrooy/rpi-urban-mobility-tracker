@@ -1,4 +1,5 @@
 import os
+from time import sleep
 import tflite_runtime.interpreter as tflite
 from PIL import Image
 import numpy as np
@@ -30,7 +31,7 @@ def camera_frame_gen(args):
     # initialize the video stream and allow the camera sensor to warmup
     print("> starting video stream...")
     vs = VideoStream(src=0).start()
-    time.sleep(2.0)
+    sleep(2.0)
 
     # loop over the frames from the video stream
     while True:
