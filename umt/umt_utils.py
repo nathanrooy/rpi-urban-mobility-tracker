@@ -10,9 +10,6 @@ from scipy.spatial.distance import cosine
 import imutils
 from imutils.video import VideoStream
 
-import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
-
 # deep sort
 from umt.deep_sort import generate_detections as gd
 from umt.deep_sort.detection import Detection
