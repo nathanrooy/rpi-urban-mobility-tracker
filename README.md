@@ -52,47 +52,41 @@ The Raspberry Pi Urban Mobility Tracker is the simplest way to track and count p
  </table>
  
 ## Install
-First install the required dependencies for cv2
+1) UMT has been dockerized in order to minimize installation friction. Start off by <a href="https://docs.docker.com/engine/install/">installing Docker</a> on your Raspbery Pi or what ever you plan on using. This is also a good time to add non-root users to the Docker user group. As an example, to add the Raspberry pi default user `Pi`:
 ```sh
-sudo apt-get install libhdf5-dev libhdf5-serial-dev libhdf5-100
-sudo apt-get install libqtgui4 libqtwebkit4 libqt4-test python3-pyqt5
-sudo apt-get install libatlas-base-dev
-sudo apt-get install libjasper-dev
-```
-Next, create and initialize a virtual environment using `virtualenv` and `python 3.7`
-```sh
-sudo apt-get install virtualenv
-virtualenv -p python3.7 venv_umt
-source venv_umt/bin/activate
+sudo usermod -aG docker Pi
 ```
 
-Now, install the required python libraries
+2) Open a terminal and create a directory for the UMT output:
 ```sh
-pip install filterpy
-pip install imutils
-pip install matplotlib
-pip install numpy
-pip install pillow
-pip isntall python-opencv
-pip install scipy
-pip install scikit-image
-pip install tensorflow
+UMT_DIR=${HOME}/umt_output && mkdir -p ${UMT_DIR}
 ```
-To run models using TensorFlow Lite, you'll need to install the interpreter which can be found [<a target="_blank" href="https://www.tensorflow.org/lite/guide/python#install_just_the_tensorflow_lite_interpreter">here</a>]. If your on a linux (x86-64) machine running Python 3.7, it's simply the following:
 
+3) Move into the new directory:
 ```sh
-pip3 install https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp37-cp37m-linux_x86_64.whl
+cd ${UMT_DIR}
 ```
-If you're planning using a Raspberry Pi running Raspbian Buster make sure to use the Python wheel built for Linux (ARM 64) and Python 3.7 which can achieved with the following:
-```sh
-pip3 install https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp37-cp37m-linux_armv7l.whl
-```
-In order to utilize the Coral TPU, the Edge TPU runtime and TensorFlow Lite interpreter library must be installed. The TensorFlow Lite installation is the same as above, and the Edge TPU can be installed by following the directions [<a target="_blank" href="https://coral.ai/docs/accelerator/get-started/#requirements">here</a>].
 
-Lastly, install this repo with the following:
+4) Download the Dockerfile and build it:
 ```sh
-pip install git+https://github.com/nathanrooy/rpi-urban-mobility-tracker
+wget https://github.com/nathanrooy/rpi-urban-mobility-tracker/blob/master/Dockerfile
+
+docker build . -t umt
 ```
+
+5) Start the Docker container:
+```sh
+docker run --rm -it --privileged --mount type=bind,src=${UMT_DIR},dst=/root umt
+```
+
+6) Test install by downloading a video and running the tracker:
+```sh
+wget https://github.com/nathanrooy/rpi-urban-mobility-tracker/raw/master/data/videos/highway_01.mp4
+
+umt -video highway_01.mp4
+```
+If everything worked correctly, you should see a directory labeled `output` filled with 10 annotated video frames.
+
 
 ## Model Choice
 The default deep learning model is the MobileNet v1 which has been trained on the <a target="_blank" href="http://cocodataset.org">COCO dataset</a> and quantized for faster performance on edge deployments. Another good model choice is <a target="_blank" href="https://github.com/nathanrooy/ped-net">PedNet</a> which is also a quantized MobileNet v1 however, it's been optimized specifically for pedestrians, cyclsts, and vehicles. To use PedNet, simply download it from its repo here: https://github.com/nathanrooy/ped-net or clone it.

@@ -22,7 +22,6 @@ setup(
     install_requires=[
 		'filterpy',
 		'imutils',
-		'matplotlib',
 		'numpy',
 		'pillow',
 	    	'opencv-python',
