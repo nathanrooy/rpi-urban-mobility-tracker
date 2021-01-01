@@ -69,7 +69,7 @@ cd ${UMT_DIR}
 
 4) Download the Dockerfile and build it:
 ```sh
-wget https://github.com/nathanrooy/rpi-urban-mobility-tracker/blob/master/Dockerfile
+wget https://raw.githubusercontent.com/nathanrooy/rpi-urban-mobility-tracker/master/Dockerfile
 
 docker build . -t umt
 ```
