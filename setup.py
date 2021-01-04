@@ -25,6 +25,7 @@ setup(
 		'matplotlib',
 		'numpy',
 		'Pillow',
+                'prometheus_client',
 		'scipy',
 		'scikit-image'
     ],

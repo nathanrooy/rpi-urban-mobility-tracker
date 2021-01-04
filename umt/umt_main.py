@@ -14,6 +14,8 @@ from umt.umt_utils import match_detections_to_labels_and_scores
 from umt.umt_utils import persist_image_output
 from umt.umt_utils import plot_colors
 
+from prometheus_client import start_http_server, Summary, Counter
+
 #--- CONSTANTS ----------------------------------------------------------------+
 
 LABEL_PATH = "models/tflite/coco_ssd_mobilenet_v1_1.0_quant_2018_06_29/labelmap.txt"
@@ -43,6 +45,8 @@ def main():
     if args.label_map_path: assert os.path.exists(args.label_map_path)==True, "can't find the specified label map..."
     if args.video_path: assert os.path.exists(args.video_path)==True, "can't find the specified video file..."
 
+    # initialize counters for metrics
+    frames = Counter('frame_counter', 'Number of frames processed')
 
     print('> INITIALIZING UMT...')
     print('   > THRESHOLD:',args.threshold)
@@ -72,6 +76,7 @@ def main():
 
             f_time = int(time.time())
             print('> FRAME:', i)
+            frames.inc()
 
             # get detections
             new_dets, classes, scores = generate_detections(pil_img, interpreter, args.threshold)
@@ -104,6 +109,7 @@ def main():
 #--- MAIN ---------------------------------------------------------------------+
 
 if __name__ == '__main__':
+    start_http_server(8000)
     main()
-    
+
 #--- END ----------------------------------------------------------------------+
