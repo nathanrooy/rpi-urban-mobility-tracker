@@ -36,6 +36,7 @@ def main():
     parser.add_argument('-tpu', dest='tpu', required=False, default=False, action='store_true', help='add this when using a coral usb accelerator')
     parser.add_argument('-nframes', dest='nframes', type=int, required=False, default=10, help='specify nunber of frames to process')
     parser.add_argument('-display', dest='display', required=False, default=False, action='store_true', help='add this flag to output images from tracker. note, that this will greatly slow down the fps rate.')
+    parser.add_argument('-nolog', dest='nolog', required=False, default=False, action='store_true', help='add this flag to disable logging to object_paths.txt. note, file is still created, just not written to.')
     args = parser.parse_args()
     
 
@@ -45,9 +46,6 @@ def main():
     if args.label_map_path: assert os.path.exists(args.label_map_path)==True, "can't find the specified label map..."
     if args.video_path: assert os.path.exists(args.video_path)==True, "can't find the specified video file..."
 
-    # initialize counters for metrics
-    frames = Counter('frame_counter', 'Number of frames processed')
-
     print('> INITIALIZING UMT...')
     print('   > THRESHOLD:',args.threshold)
 
@@ -56,6 +54,13 @@ def main():
         
     # parse label map
     labels = parse_label_map(args, DEFAULT_LABEL_MAP_PATH)
+
+    # initialize counters for metrics
+    frames = Counter('umt_frame_counter', 'Number of frames processed')
+
+    label_counter = Counter ('umt_label_counter', 'Number of each label counted', ['type'])
+    for label in labels.values():
+        label_counter.labels(type=label)
 
     # create output directory
     if not os.path.exists('output'): os.makedirs('output')
@@ -97,7 +102,8 @@ def main():
                     
                     # save object locations
                     for d, tracker_label, tracker_score in zip(trackers, tracker_labels, tracker_scores):
-                        print(f'{i},{f_time},{d[4]},{d[0]},{d[1]},{d[2]-d[0]},{d[3]-d[1]},{tracker_label},{tracker_score}', file=out_file)
+                        if not(args.nolog):
+                            print(f'{i},{f_time},{d[4]},{d[0]},{d[1]},{d[2]-d[0]},{d[3]-d[1]},{tracker_label},{tracker_score}', file=out_file)
 
                 except:
                     print('   > TRACKER FAILED...')
