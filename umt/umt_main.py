@@ -18,7 +18,7 @@ from umt.umt_utils import initialize_detector
 from umt.umt_utils import initialize_img_source
 from umt.umt_utils import generate_detections
 
-from prometheus_client import start_http_server, Summary, Counter
+from prometheus_client import start_http_server, Summary, Counter, Gauge
 
 #--- CONSTANTS ----------------------------------------------------------------+
 
@@ -76,6 +76,9 @@ def main():
         for label in labels.values():
             label_counter.labels(type=label)
 
+        track_count_hwm = 0 # Track id high water mark
+        track_count = Gauge('umt_tracked_objects', 'Number of objects that have been tracked')
+
     # create output directory
     if not os.path.exists('output') and args.save_frames: os.makedirs('output')
  
@@ -120,7 +123,7 @@ def main():
                 tracker.update(detections)
                 
                 # save object locations
-                if len(tracker.tracks) > 0 and not args.nolog:
+                if len(tracker.tracks) > 0:
                     for track in tracker.tracks:
                         bbox = track.to_tlbr()
                         class_name = labels[track.get_class()]
@@ -129,7 +132,12 @@ def main():
                             f'{int(track.time_since_update)},{str(track.hits)},'
                             f'{int(bbox[0])},{int(bbox[1])},'
                             f'{int(bbox[2])},{int(bbox[3])}')
-                        print(row, file=out_file)
+                        if not args.nolog: print(row, file=out_file)
+                        if args.metrics: # update the metrics
+                            if track.track_id > track_count_hwm: # new thing being tracked
+                                track_count_hwm = track.track_id
+                                track_count.set(track.track_id)
+                                label_counter.labels(type=class_name).inc()
                 
             # only for live display
             if args.live_view or args.save_frames:
