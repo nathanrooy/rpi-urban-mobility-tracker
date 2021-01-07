@@ -48,6 +48,7 @@ def main():
     parser.add_argument('-save', dest='save_frames', required=False, default=False, action='store_true', help='add this flag if you want to persist the image output. note, that this will greatly slow down the fps rate.')
     parser.add_argument('-metrics', dest='metrics', required=False, default=False, action='store_true', help='enable prometheus metrics')
     parser.add_argument('-metricport', dest='metric_port', type=int, required=False, default=8000, help='prometheus metrics port (default 8000)')
+    parser.add_argument('-initlabelcounters', dest='init_label_counters', required=False, default=False, action='store_true', help='metrics return 0 for all possible label counters available in the model')
     parser.add_argument('-nolog', dest='nolog', required=False, default=False, action='store_true', help='add this flag to disable logging to object_paths.txt. note, file is still created, just not written to.')
     args = parser.parse_args()
     
@@ -74,8 +75,9 @@ def main():
         frames.labels(result='error')
 
         label_counter = Counter ('umt_label_counter', 'Number of each label counted', ['type'])
-        for label in labels.values():
-            label_counter.labels(type=label)
+        if args.init_label_counters:
+            for label in labels.values():
+                label_counter.labels(type=label)
 
         track_count_hwm = 0 # Track id high water mark
         track_count = Gauge('umt_tracked_objects', 'Number of objects that have been tracked')
