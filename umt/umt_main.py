@@ -46,7 +46,8 @@ def main():
     parser.add_argument('-nframes', dest='nframes', type=int, required=False, default=10, help='specify nunber of frames to process')
     parser.add_argument('-display', dest='live_view', required=False, default=False, action='store_true', help='add this flag to view a live display. note, that this will greatly slow down the fps rate.')
     parser.add_argument('-save', dest='save_frames', required=False, default=False, action='store_true', help='add this flag if you want to persist the image output. note, that this will greatly slow down the fps rate.')
-    parser.add_argument('-metrics', dest='metrics', required=False, default=False, action='store_true', help='enable prometheus metrics on port 8000')
+    parser.add_argument('-metrics', dest='metrics', required=False, default=False, action='store_true', help='enable prometheus metrics')
+    parser.add_argument('-metricport', dest='metric_port', type=int, required=False, default=8000, help='prometheus metrics port (default 8000)')
     parser.add_argument('-nolog', dest='nolog', required=False, default=False, action='store_true', help='add this flag to disable logging to object_paths.txt. note, file is still created, just not written to.')
     args = parser.parse_args()
     
@@ -78,6 +79,10 @@ def main():
 
         track_count_hwm = 0 # Track id high water mark
         track_count = Gauge('umt_tracked_objects', 'Number of objects that have been tracked')
+
+        print('   > METRIC PORT',args.metric_port)
+        print('   > STARTING METRIC SERVER')
+        start_http_server(args.metric_port)
 
     # create output directory
     if not os.path.exists('output') and args.save_frames: os.makedirs('output')
@@ -173,7 +178,6 @@ def main():
 #--- MAIN ---------------------------------------------------------------------+
 
 if __name__ == '__main__':
-    start_http_server(8000)
     main()
 
 #--- END ----------------------------------------------------------------------+
