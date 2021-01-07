@@ -23,8 +23,9 @@ setup(
 		'filterpy',
 		'imutils',
 		'numpy',
-		'pillow',
+		'Pillow',
 	    	'opencv-python',
+                'prometheus_client',
 		'scipy',
 		'scikit-image',
 	    	'tensorflow'
