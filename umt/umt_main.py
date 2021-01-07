@@ -46,6 +46,7 @@ def main():
     parser.add_argument('-nframes', dest='nframes', type=int, required=False, default=10, help='specify nunber of frames to process')
     parser.add_argument('-display', dest='live_view', required=False, default=False, action='store_true', help='add this flag to view a live display. note, that this will greatly slow down the fps rate.')
     parser.add_argument('-save', dest='save_frames', required=False, default=False, action='store_true', help='add this flag if you want to persist the image output. note, that this will greatly slow down the fps rate.')
+    parser.add_argument('-metrics', dest='metrics', required=False, default=False, action='store_true', help='enable prometheus metrics on port 8000')
     parser.add_argument('-nolog', dest='nolog', required=False, default=False, action='store_true', help='add this flag to disable logging to object_paths.txt. note, file is still created, just not written to.')
     args = parser.parse_args()
     
@@ -64,12 +65,16 @@ def main():
     # initialize detector
     interpreter = initialize_detector(args)
 
-    # initialize counters for metrics
-    frames = Counter('umt_frame_counter', 'Number of frames processed')
+    if args.metrics:
+        # initialize counters for metrics
+        frames = Counter('umt_frame_counter', 'Number of frames processed', ['result'])
+        frames.labels(result='no_detection')
+        frames.labels(result='detection')
+        frames.labels(result='error')
 
-    label_counter = Counter ('umt_label_counter', 'Number of each label counted', ['type'])
-    for label in labels.values():
-        label_counter.labels(type=label)
+        label_counter = Counter ('umt_label_counter', 'Number of each label counted', ['type'])
+        for label in labels.values():
+            label_counter.labels(type=label)
 
     # create output directory
     if not os.path.exists('output') and args.save_frames: os.makedirs('output')
@@ -103,15 +108,19 @@ def main():
             detections = generate_detections(pil_img, interpreter, args.threshold)
 			
             # proceed to updating state
-            if len(detections) == 0: print('   > no detections...')
+            if len(detections) == 0:
+                print('   > no detections...')
+                if args.metrics: frames.labels(result='no_detection').inc()
             else:
-            
+                # update metric
+                if args.metrics: frames.labels(result='detection').inc()
+
                 # update tracker
                 tracker.predict()
                 tracker.update(detections)
                 
                 # save object locations
-                if len(tracker.tracks) > 0:
+                if len(tracker.tracks) > 0 and not args.nolog:
                     for track in tracker.tracks:
                         bbox = track.to_tlbr()
                         class_name = labels[track.get_class()]
