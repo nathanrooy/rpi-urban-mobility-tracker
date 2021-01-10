@@ -23,7 +23,7 @@ setup(
 		'filterpy',
 		'imutils',
 		'numpy',
-		'Pillow',
+		'pillow',
 	    	'opencv-python',
                 'prometheus_client',
 		'scipy',
