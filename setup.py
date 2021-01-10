@@ -25,6 +25,7 @@ setup(
 		'numpy',
 		'pillow',
 	    	'opencv-python',
+                'prometheus_client',
 		'scipy',
 		'scikit-image',
 	    	'tensorflow'
