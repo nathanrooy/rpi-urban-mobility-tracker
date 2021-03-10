@@ -9,7 +9,7 @@ import cv2
 from imutils.video import VideoStream
 
 # deep sort
-from umt.deep_sort_tools import generate_detections as gd
+from umt.deep_sort_tools.generate_detections import generate_detections as gd
 from umt.deep_sort import detection as Detection
 from umt.application_util.preprocessing import non_max_suppression
 
