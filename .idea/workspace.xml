@@ -25,34 +25,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2f6d1c78-ac22-44a2-9611-affb608006f6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/deep_sort/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/deep_sort/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/deep_sort/application_util/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/application_util/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/deep_sort/application_util/image_viewer.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/application_util/image_viewer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/deep_sort/application_util/preprocessing.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/application_util/preprocessing.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/deep_sort/application_util/visualization.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/application_util/visualization.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/deep_sort/deep_sort/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/deep_sort/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/deep_sort/deep_sort/detection.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/deep_sort/detection.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/deep_sort/deep_sort/iou_matching.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/deep_sort/iou_matching.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/deep_sort/deep_sort/kalman_filter.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/deep_sort/kalman_filter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/deep_sort/deep_sort/linear_assignment.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/deep_sort/linear_assignment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/deep_sort/deep_sort/nn_matching.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/deep_sort/nn_matching.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/deep_sort/deep_sort/track.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/deep_sort/track.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/deep_sort/deep_sort/tracker.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/deep_sort/tracker.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/deep_sort/deep_sort_app.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/deep_sort/deep_sort_tools/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/deep_sort_tools/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/deep_sort/deep_sort_tools/freeze_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/deep_sort_tools/freeze_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/deep_sort/deep_sort_tools/generate_detections.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/deep_sort_tools/generate_detections.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/deep_sort/evaluate_motchallenge.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/deep_sort/generate_videos.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/deep_sort/requirements.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/deep_sort/setup.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/deep_sort/show_results.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/umt/umt_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/umt_main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/umt/umt_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/umt_utils.py" afterDir="false" />
-    </list>
+    <list default="true" id="2f6d1c78-ac22-44a2-9611-affb608006f6" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -88,7 +61,6 @@
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Jake\PycharmProjects\rpi-urban-mobility-tracker\umt" />
-      <recent name="C:\Users\Jake\PycharmProjects\rpi-urban-mobility-tracker" />
     </key>
   </component>
   <component name="RunManager">
@@ -153,14 +125,7 @@
       <option name="project" value="LOCAL" />
       <updated>1615388357385</updated>
     </task>
-    <task id="LOCAL-00005" summary="Fixed import paths from deep_sort update">
-      <created>1615389375545</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1615389375545</updated>
-    </task>
-    <option name="localTasksCounter" value="6" />
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -225,9 +190,9 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="782" y="345" key="SettingsEditor/0.0.2560.1400@0.0.2560.1400" timestamp="1615387142235" />
-    <state x="873" y="433" key="Vcs.Push.Dialog.v2" timestamp="1615389410108">
+    <state x="873" y="433" key="Vcs.Push.Dialog.v2" timestamp="1615388361201">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="873" y="433" key="Vcs.Push.Dialog.v2/0.0.2560.1400@0.0.2560.1400" timestamp="1615389410108" />
+    <state x="873" y="433" key="Vcs.Push.Dialog.v2/0.0.2560.1400@0.0.2560.1400" timestamp="1615388361201" />
   </component>
 </project>
