@@ -25,7 +25,33 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2f6d1c78-ac22-44a2-9611-affb608006f6" name="Default Changelist" comment="" />
+    <list default="true" id="2f6d1c78-ac22-44a2-9611-affb608006f6" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/umt/deep_sort/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/umt/deep_sort/application_util/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/umt/deep_sort/deep_sort/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/umt/deep_sort/deep_sort_app.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/umt/deep_sort/deep_sort_tools/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/umt/deep_sort/deep_sort_tools/freeze_model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/umt/deep_sort/evaluate_motchallenge.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/umt/deep_sort/generate_videos.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/umt/deep_sort/requirements.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/umt/deep_sort/setup.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/umt/deep_sort/show_results.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/umt/deep_sort/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/deep_sort/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/umt/deep_sort/detection.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/deep_sort/deep_sort/detection.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/umt/deep_sort/generate_detections.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/deep_sort/deep_sort_tools/generate_detections.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/umt/deep_sort/image_viewer.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/deep_sort/application_util/image_viewer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/umt/deep_sort/iou_matching.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/deep_sort/deep_sort/iou_matching.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/umt/deep_sort/kalman_filter.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/deep_sort/deep_sort/kalman_filter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/umt/deep_sort/linear_assignment.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/deep_sort/deep_sort/linear_assignment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/umt/deep_sort/mars-small128.pb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/umt/deep_sort/nn_matching.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/deep_sort/deep_sort/nn_matching.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/umt/deep_sort/preprocessing.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/deep_sort/application_util/preprocessing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/umt/deep_sort/track.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/deep_sort/deep_sort/track.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/umt/deep_sort/tracker.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/deep_sort/deep_sort/tracker.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/umt/deep_sort/visualization.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/deep_sort/application_util/visualization.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -55,36 +81,12 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/umt/umt_main.py" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Jake\PycharmProjects\rpi-urban-mobility-tracker\umt" />
     </key>
-  </component>
-  <component name="RunManager">
-    <configuration name="umt" type="PythonConfigurationType" factoryName="Python">
-      <module name="rpi-urban-mobility-tracker" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="C:\Users\Jake\anaconda3\envs\CV-EdgeDetection\python.exe" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/umt" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/umt/umt_main.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -111,21 +113,7 @@
       <option name="project" value="LOCAL" />
       <updated>1615386326423</updated>
     </task>
-    <task id="LOCAL-00003" summary="Updated deep_sort and fixed import paths from update">
-      <created>1615387164685</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1615387164685</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Fixed import paths from deep_sort update">
-      <created>1615388357385</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1615388357385</updated>
-    </task>
-    <option name="localTasksCounter" value="5" />
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -158,41 +146,16 @@
     </ignored-roots>
     <MESSAGE value="Possible fix for the get_class error" />
     <MESSAGE value="Updated deep_sort and fixed import paths from update" />
-    <MESSAGE value="Fixed import paths from deep_sort update" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed import paths from deep_sort update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated deep_sort and fixed import paths from update" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="736" y="355" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1615387909448">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="736" y="355" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1615387909448" />
-    <state x="1061" y="455" key="FileChooserDialogImpl" timestamp="1615387639216">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="1061" y="455" key="FileChooserDialogImpl/0.0.2560.1400@0.0.2560.1400" timestamp="1615387639216" />
-    <state width="1269" height="400" key="GridCell.Tab.0.bottom" timestamp="1615387962119">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="1269" height="400" key="GridCell.Tab.0.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1615387962119" />
-    <state width="1269" height="400" key="GridCell.Tab.0.center" timestamp="1615387962119">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="1269" height="400" key="GridCell.Tab.0.center/0.0.2560.1400@0.0.2560.1400" timestamp="1615387962119" />
-    <state width="1269" height="400" key="GridCell.Tab.0.left" timestamp="1615387962119">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="1269" height="400" key="GridCell.Tab.0.left/0.0.2560.1400@0.0.2560.1400" timestamp="1615387962119" />
-    <state width="1269" height="400" key="GridCell.Tab.0.right" timestamp="1615387962119">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="1269" height="400" key="GridCell.Tab.0.right/0.0.2560.1400@0.0.2560.1400" timestamp="1615387962119" />
     <state x="782" y="345" key="SettingsEditor" timestamp="1615387142235">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="782" y="345" key="SettingsEditor/0.0.2560.1400@0.0.2560.1400" timestamp="1615387142235" />
-    <state x="873" y="433" key="Vcs.Push.Dialog.v2" timestamp="1615388361201">
+    <state x="873" y="433" key="Vcs.Push.Dialog.v2" timestamp="1615386332983">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="873" y="433" key="Vcs.Push.Dialog.v2/0.0.2560.1400@0.0.2560.1400" timestamp="1615388361201" />
+    <state x="873" y="433" key="Vcs.Push.Dialog.v2/0.0.2560.1400@0.0.2560.1400" timestamp="1615386332983" />
   </component>
 </project>

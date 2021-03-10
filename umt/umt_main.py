@@ -8,8 +8,9 @@ import cv2
 import numpy as np
 
 # deep sort
-from deep_sort.deep_sort import tracker as Tracker
-from deep_sort.deep_sort import nn_matching
+from umt.deep_sort.deep_sort.tracker import tracker
+from umt.deep_sort.application_util import preprocessing
+from umt.deep_sort.deep_sort import nn_matching
 
 # umt utils
 from umt.umt_utils import parse_label_map
