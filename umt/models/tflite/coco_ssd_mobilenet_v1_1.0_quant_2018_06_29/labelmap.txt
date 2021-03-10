@@ -1,7 +1,7 @@
 empty
 person
-car
 bicycle
+car
 motorcycle
 airplane
 bus
