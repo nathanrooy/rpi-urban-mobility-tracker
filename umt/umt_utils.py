@@ -9,9 +9,9 @@ import cv2
 from imutils.video import VideoStream
 
 # deep sort
-from umt.deep_sort_tools import generate_detections as gd
-from umt.deep_sort import detection as Detection
-from umt.application_util.preprocessing import non_max_suppression
+from deep_sort.deep_sort_tools import generate_detections as gd
+from deep_sort import Detection
+from deep_sort import non_max_suppression
 
 # constants
 nms_max_overlap = 1.0
