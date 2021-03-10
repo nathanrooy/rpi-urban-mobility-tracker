@@ -5,15 +5,13 @@ from PIL import Image
 import numpy as np
 
 import cv2
-from scipy.spatial.distance import cosine
 
-import imutils
 from imutils.video import VideoStream
 
 # deep sort
-from umt.deep_sort.deep_sort_tools import generate_detections as gd
-from umt.deep_sort.deep_sort.detection import Detection
-from umt.deep_sort.application_util.preprocessing import non_max_suppression
+from deep_sort.deep_sort_tools import generate_detections as gd
+from deep_sort import Detection
+from deep_sort import non_max_suppression
 
 # constants
 nms_max_overlap = 1.0

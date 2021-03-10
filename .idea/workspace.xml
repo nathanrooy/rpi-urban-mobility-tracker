@@ -25,11 +25,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2f6d1c78-ac22-44a2-9611-affb608006f6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/rpi-urban-mobility-tracker.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/rpi-urban-mobility-tracker.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/umt/umt_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/umt_main.py" afterDir="false" />
-    </list>
+    <list default="true" id="2f6d1c78-ac22-44a2-9611-affb608006f6" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -122,7 +118,14 @@
       <option name="project" value="LOCAL" />
       <updated>1615387164685</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Fixed import paths from deep_sort update">
+      <created>1615388357385</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1615388357385</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -155,7 +158,8 @@
     </ignored-roots>
     <MESSAGE value="Possible fix for the get_class error" />
     <MESSAGE value="Updated deep_sort and fixed import paths from update" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated deep_sort and fixed import paths from update" />
+    <MESSAGE value="Fixed import paths from deep_sort update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed import paths from deep_sort update" />
   </component>
   <component name="WindowStateProjectService">
     <state x="736" y="355" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1615387909448">
@@ -186,9 +190,9 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="782" y="345" key="SettingsEditor/0.0.2560.1400@0.0.2560.1400" timestamp="1615387142235" />
-    <state x="873" y="433" key="Vcs.Push.Dialog.v2" timestamp="1615387201389">
+    <state x="873" y="433" key="Vcs.Push.Dialog.v2" timestamp="1615388361201">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="873" y="433" key="Vcs.Push.Dialog.v2/0.0.2560.1400@0.0.2560.1400" timestamp="1615387201389" />
+    <state x="873" y="433" key="Vcs.Push.Dialog.v2/0.0.2560.1400@0.0.2560.1400" timestamp="1615388361201" />
   </component>
 </project>
