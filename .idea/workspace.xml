@@ -25,7 +25,34 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2f6d1c78-ac22-44a2-9611-affb608006f6" name="Default Changelist" comment="" />
+    <list default="true" id="2f6d1c78-ac22-44a2-9611-affb608006f6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deep_sort/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deep_sort/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deep_sort/application_util/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/application_util/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deep_sort/application_util/image_viewer.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/application_util/image_viewer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deep_sort/application_util/preprocessing.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/application_util/preprocessing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deep_sort/application_util/visualization.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/application_util/visualization.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deep_sort/deep_sort/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/deep_sort/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deep_sort/deep_sort/detection.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/deep_sort/detection.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deep_sort/deep_sort/iou_matching.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/deep_sort/iou_matching.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deep_sort/deep_sort/kalman_filter.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/deep_sort/kalman_filter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deep_sort/deep_sort/linear_assignment.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/deep_sort/linear_assignment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deep_sort/deep_sort/nn_matching.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/deep_sort/nn_matching.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deep_sort/deep_sort/track.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/deep_sort/track.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deep_sort/deep_sort/tracker.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/deep_sort/tracker.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deep_sort/deep_sort_app.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deep_sort/deep_sort_tools/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/deep_sort_tools/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deep_sort/deep_sort_tools/freeze_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/deep_sort_tools/freeze_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deep_sort/deep_sort_tools/generate_detections.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/deep_sort_tools/generate_detections.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deep_sort/evaluate_motchallenge.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deep_sort/generate_videos.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deep_sort/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deep_sort/setup.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/deep_sort/show_results.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/umt/umt_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/umt_main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/umt/umt_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/umt/umt_utils.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -133,14 +160,7 @@
       <option name="project" value="LOCAL" />
       <updated>1615389375545</updated>
     </task>
-    <task id="LOCAL-00006" summary="Fixed import paths from deep_sort update">
-      <created>1615390243549</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1615390243549</updated>
-    </task>
-    <option name="localTasksCounter" value="7" />
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -185,29 +205,29 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1061" y="455" key="FileChooserDialogImpl/0.0.2560.1400@0.0.2560.1400" timestamp="1615387639216" />
-    <state width="1269" height="400" key="GridCell.Tab.0.bottom" timestamp="1615390267300">
+    <state width="1269" height="400" key="GridCell.Tab.0.bottom" timestamp="1615387962119">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1269" height="400" key="GridCell.Tab.0.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1615390267300" />
-    <state width="1269" height="400" key="GridCell.Tab.0.center" timestamp="1615390267300">
+    <state width="1269" height="400" key="GridCell.Tab.0.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1615387962119" />
+    <state width="1269" height="400" key="GridCell.Tab.0.center" timestamp="1615387962119">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1269" height="400" key="GridCell.Tab.0.center/0.0.2560.1400@0.0.2560.1400" timestamp="1615390267300" />
-    <state width="1269" height="400" key="GridCell.Tab.0.left" timestamp="1615390267300">
+    <state width="1269" height="400" key="GridCell.Tab.0.center/0.0.2560.1400@0.0.2560.1400" timestamp="1615387962119" />
+    <state width="1269" height="400" key="GridCell.Tab.0.left" timestamp="1615387962119">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1269" height="400" key="GridCell.Tab.0.left/0.0.2560.1400@0.0.2560.1400" timestamp="1615390267300" />
-    <state width="1269" height="400" key="GridCell.Tab.0.right" timestamp="1615390267300">
+    <state width="1269" height="400" key="GridCell.Tab.0.left/0.0.2560.1400@0.0.2560.1400" timestamp="1615387962119" />
+    <state width="1269" height="400" key="GridCell.Tab.0.right" timestamp="1615387962119">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1269" height="400" key="GridCell.Tab.0.right/0.0.2560.1400@0.0.2560.1400" timestamp="1615390267300" />
+    <state width="1269" height="400" key="GridCell.Tab.0.right/0.0.2560.1400@0.0.2560.1400" timestamp="1615387962119" />
     <state x="782" y="345" key="SettingsEditor" timestamp="1615387142235">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="782" y="345" key="SettingsEditor/0.0.2560.1400@0.0.2560.1400" timestamp="1615387142235" />
-    <state x="873" y="433" key="Vcs.Push.Dialog.v2" timestamp="1615390284873">
+    <state x="873" y="433" key="Vcs.Push.Dialog.v2" timestamp="1615389410108">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="873" y="433" key="Vcs.Push.Dialog.v2/0.0.2560.1400@0.0.2560.1400" timestamp="1615390284873" />
+    <state x="873" y="433" key="Vcs.Push.Dialog.v2/0.0.2560.1400@0.0.2560.1400" timestamp="1615389410108" />
   </component>
 </project>
