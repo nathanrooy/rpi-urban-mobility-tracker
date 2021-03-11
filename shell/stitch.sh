@@ -1,0 +1,1 @@
+ffmpeg -f image2 -i output/frame_%01d.jpg -vcodec h264 -y analyzed-frames.mp4
