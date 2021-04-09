@@ -52,9 +52,9 @@ The Raspberry Pi Urban Mobility Tracker is the simplest way to track and count p
  </table>
  
 ## Install
-1) UMT has been dockerized in order to minimize installation friction. Start off by <a href="https://docs.docker.com/engine/install/">installing Docker</a> on your Raspbery Pi or what ever you plan on using. The instructions below assume a Raspberry Pi v4 with <a href="https://downloads.raspberrypi.org/raspios_armhf/images/raspios_armhf-2020-12-04/">Raspberry Pi OS 2020-12-02</a>. This is also a good time to add non-root users to the Docker user group. As an example, to add the Raspberry pi default user `Pi`:
+1) UMT has been dockerized in order to minimize installation friction. Start off by <a href="https://docs.docker.com/engine/install/">installing Docker</a> on your Raspbery Pi or what ever you plan on using. The instructions below assume a Raspberry Pi v4 with <a href="https://downloads.raspberrypi.org/raspios_armhf/images/raspios_armhf-2020-12-04/">Raspberry Pi OS 2020-12-02</a>. This is also a good time to add non-root users to the Docker user group. As an example, to add the Raspberry pi default user `pi`:
 ```sh
-sudo usermod -aG docker Pi
+sudo usermod -aG docker pi
 ```
 
 2) Open a terminal and create a directory for the UMT output:
