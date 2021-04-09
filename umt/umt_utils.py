@@ -11,9 +11,12 @@ import imutils
 from imutils.video import VideoStream
 
 # deep sort
-from umt.deep_sort import generate_detections as gd
-from umt.deep_sort.detection import Detection
-from umt.deep_sort.preprocessing import non_max_suppression
+#from umt.deep_sort import generate_detections as gd
+#from umt.deep_sort.detection import Detection
+#from umt.deep_sort.preprocessing import non_max_suppression
+from deep_sort.detection import Detection
+from deep_sort_tools import generate_detections as gd
+
 
 # constants
 nms_max_overlap = 1.0
@@ -180,7 +183,7 @@ def generate_detections(pil_img_obj, interpreter, threshold):
     features = encoder(np.array(pil_img_obj), bboxes)
 
     # munge into deep sort detection objects
-    detections = [Detection(bbox, score, class_name, feature) for bbox, score, class_name, feature in zip(bboxes, scores, classes, features)]
+    detections = [Detection(bbox, score, feature, class_name) for bbox, score, feature, class_name in zip(bboxes, scores, features, classes)]
 
     # run non-maximum suppression
     # borrowed from: https://github.com/nwojke/deep_sort/blob/master/deep_sort_app.py#L174
@@ -200,3 +203,66 @@ def parse_label_map(args, DEFAULT_LABEL_MAP_PATH):
     for i, row in enumerate(open(args.label_map_path)):
         labels[i] = row.replace('\n','')
     return labels
+
+
+def non_max_suppression(boxes, max_bbox_overlap, scores=None):
+    """Suppress overlapping detections.
+    Original code from [1]_ has been adapted to include confidence score.
+    .. [1] http://www.pyimagesearch.com/2015/02/16/
+           faster-non-maximum-suppression-python/
+    Examples
+    --------
+        >>> boxes = [d.roi for d in detections]
+        >>> scores = [d.confidence for d in detections]
+        >>> indices = non_max_suppression(boxes, max_bbox_overlap, scores)
+        >>> detections = [detections[i] for i in indices]
+    Parameters
+    ----------
+    boxes : ndarray
+        Array of ROIs (x, y, width, height).
+    max_bbox_overlap : float
+        ROIs that overlap more than this values are suppressed.
+    scores : Optional[array_like]
+        Detector confidence score.
+    Returns
+    -------
+    List[int]
+        Returns indices of detections that have survived non-maxima suppression.
+    """
+    if len(boxes) == 0:
+        return []
+
+    boxes = boxes.astype(np.float)
+    pick = []
+
+    x1 = boxes[:, 0]
+    y1 = boxes[:, 1]
+    x2 = boxes[:, 2] + boxes[:, 0]
+    y2 = boxes[:, 3] + boxes[:, 1]
+
+    area = (x2 - x1 + 1) * (y2 - y1 + 1)
+    if scores is not None:
+        idxs = np.argsort(scores)
+    else:
+        idxs = np.argsort(y2)
+
+    while len(idxs) > 0:
+        last = len(idxs) - 1
+        i = idxs[last]
+        pick.append(i)
+
+        xx1 = np.maximum(x1[i], x1[idxs[:last]])
+        yy1 = np.maximum(y1[i], y1[idxs[:last]])
+        xx2 = np.minimum(x2[i], x2[idxs[:last]])
+        yy2 = np.minimum(y2[i], y2[idxs[:last]])
+
+        w = np.maximum(0, xx2 - xx1 + 1)
+        h = np.maximum(0, yy2 - yy1 + 1)
+
+        overlap = (w * h) / area[idxs[:last]]
+
+        idxs = np.delete(
+            idxs, np.concatenate(
+                ([last], np.where(overlap > max_bbox_overlap)[0])))
+
+    return pick

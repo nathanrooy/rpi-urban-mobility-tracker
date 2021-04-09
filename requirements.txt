@@ -1,0 +1,9 @@
+https://github.com/mk-michal/deep_sort/releases/download/v1.2.0/deep_sort-1.2.0-py3-none-any.whl
+filterpy
+imutils
+numpy
+pillow
+opencv-python
+scipy
+scikit-image
+tensorflow

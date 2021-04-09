@@ -51,6 +51,10 @@ RUN pip3 install flatbuffers==1.12
 # install tflite runtime
 RUN pip3 install https://github.com/google-coral/pycoral/releases/download/release-frogfish/tflite_runtime-2.5.0-cp37-cp37m-linux_armv7l.whl
 
+# install some additional tools for debugging
+RUN apt-get install -y feh
+RUN apt-get install -y vim
+
 # install umt
 RUN apt-get install -y git
 RUN pip3 install git+https://github.com/nathanrooy/rpi-urban-mobility-tracker --no-deps

@@ -51,7 +51,7 @@ The Raspberry Pi Urban Mobility Tracker is the simplest way to track and count p
   </tr>
  </table>
  
-## Install
+## Install (Raspberry Pi)
 1) UMT has been dockerized in order to minimize installation friction. Start off by <a href="https://docs.docker.com/engine/install/">installing Docker</a> on your Raspbery Pi or what ever you plan on using. The instructions below assume a Raspberry Pi v4 with <a href="https://downloads.raspberrypi.org/raspios_armhf/images/raspios_armhf-2020-12-04/">Raspberry Pi OS 2020-12-02</a>. This is also a good time to add non-root users to the Docker user group. As an example, to add the Raspberry pi default user `pi`:
 ```sh
 sudo usermod -aG docker pi
@@ -87,6 +87,19 @@ umt -video highway_01.mp4
 ```
 If everything worked correctly, you should see a directory labeled `output` filled with 10 annotated video frames.
 
+## Install (Ubuntu)
+First, create a new virtualenv then install the TensorFlow Lite runtime package for Python:
+
+```sh
+pip3 install --extra-index-url https://google-coral.github.io/py-repo/ tflite_runtime
+```
+
+Then finish with the following:
+```sh
+pip install git+https://github.com/nathanrooy/rpi-urban-mobility-tracker
+```
+
+Lastly, test the install by running step #6 from the Raspberry Pi install instructions above.
 
 ## Model Choice
 The default deep learning model is the MobileNet v1 which has been trained on the <a target="_blank" href="http://cocodataset.org">COCO dataset</a> and quantized for faster performance on edge deployments. Another good model choice is <a target="_blank" href="https://github.com/nathanrooy/ped-net">PedNet</a> which is also a quantized MobileNet v1 however, it's been optimized specifically for pedestrians, cyclsts, and vehicles. To use PedNet, simply download it from its repo here: https://github.com/nathanrooy/ped-net or clone it.
