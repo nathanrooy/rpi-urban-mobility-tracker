@@ -167,7 +167,3 @@ umt -imageseq data/images/PETS09-S2L1/ -tpu
   doi={10.1109/WACV.2018.00087}
 }
 ```
-Additionally, the following repo was referenced during the DeepSORT implementation:
-```
-https://github.com/theAIGuysCode/yolov4-deepsort
-```
