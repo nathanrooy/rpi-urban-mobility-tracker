@@ -88,7 +88,7 @@ umt -video highway_01.mp4
 If everything worked correctly, you should see a directory labeled `output` filled with 10 annotated video frames.
 
 ## Install (Ubuntu)
-First, create a new virtualenv then install the TensorFlow Lite runtime package for Python:
+First, create a new virtualenv, initialize it, then install the [TensorFlow Lite runtime package](https://www.tensorflow.org/lite/guide/python) for Python:
 
 ```sh
 pip3 install --extra-index-url https://google-coral.github.io/py-repo/ tflite_runtime
