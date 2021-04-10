@@ -20,9 +20,6 @@ RUN apt-get install -y gfortran
 RUN apt-get install -y libatlas-base-dev
 RUN apt-get install -y python3-scipy
 
-# install remaining dependencies
-RUN pip3 install filterpy==1.4.5 --no-deps
-
 # download tensorflow 2.4 wheel and install
 WORKDIR /root
 RUN apt-get install -y wget
@@ -55,6 +52,11 @@ RUN pip3 install https://github.com/google-coral/pycoral/releases/download/relea
 RUN apt-get install -y feh
 RUN apt-get install -y vim
 
-# install umt
+# install git
 RUN apt-get install -y git
+
+# install deep sort
+RUN pip3 install git+https://github.com/mk-michal/deep_sort
+
+# install umt
 RUN pip3 install git+https://github.com/nathanrooy/rpi-urban-mobility-tracker --no-deps
