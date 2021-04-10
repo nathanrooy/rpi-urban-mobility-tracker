@@ -20,9 +20,6 @@ RUN apt-get install -y gfortran
 RUN apt-get install -y libatlas-base-dev
 RUN apt-get install -y python3-scipy
 
-# install remaining dependencies
-RUN pip3 install filterpy==1.4.5 --no-deps
-
 # download tensorflow 2.4 wheel and install
 WORKDIR /root
 RUN apt-get install -y wget
@@ -51,6 +48,15 @@ RUN pip3 install flatbuffers==1.12
 # install tflite runtime
 RUN pip3 install https://github.com/google-coral/pycoral/releases/download/release-frogfish/tflite_runtime-2.5.0-cp37-cp37m-linux_armv7l.whl
 
-# install umt
+# install some additional tools for debugging
+RUN apt-get install -y feh
+RUN apt-get install -y vim
+
+# install git
 RUN apt-get install -y git
+
+# install deep sort
+RUN pip3 install git+https://github.com/mk-michal/deep_sort
+
+# install umt
 RUN pip3 install git+https://github.com/nathanrooy/rpi-urban-mobility-tracker --no-deps

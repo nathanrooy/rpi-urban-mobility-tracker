@@ -8,9 +8,8 @@ import cv2
 import numpy as np
 
 # deep sort
-from umt.deep_sort.tracker import Tracker
-from umt.deep_sort import preprocessing
-from umt.deep_sort import nn_matching
+from deep_sort.tracker import Tracker
+from deep_sort import nn_matching
  
 # umt utils
 from umt.umt_utils import parse_label_map
@@ -104,7 +103,7 @@ def main():
                 if len(tracker.tracks) > 0:
                     for track in tracker.tracks:
                         bbox = track.to_tlbr()
-                        class_name = labels[track.get_class()]
+                        class_name = labels[track.class_name]
                         row = (f'{i},{f_time},{class_name},'
                             f'{track.track_id},{int(track.age)},'
                             f'{int(track.time_since_update)},{str(track.hits)},'
@@ -125,7 +124,7 @@ def main():
                     
                     # draw detections and label
                     bbox = track.to_tlbr()
-                    class_name = labels[track.get_class()]
+                    class_name = labels[track.class_name]
                     color = COLORS[int(track.track_id) % len(COLORS)].tolist()
                     cv2.rectangle(cv2_img, (int(bbox[0]), int(bbox[1])), (int(bbox[2]), int(bbox[3])), color, 2)
                     cv2.rectangle(cv2_img, (int(bbox[0]), int(bbox[1]-30)), (int(bbox[0])+(len(str(class_name))+len(str(track.track_id)))*17, int(bbox[1])), color, -1)
