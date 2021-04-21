@@ -87,13 +87,27 @@ umt -video highway_01.mp4
 ```
 If everything worked correctly, you should see a directory labeled `output` filled with 10 annotated video frames.
 
-## Install (Ubuntu)
-First, create a new virtualenv, initialize it, then install the [TensorFlow Lite runtime package](https://www.tensorflow.org/lite/guide/python) for Python:
+## Install from GIT
+
+### 1) Install TensorFlow Light
+
+**Debian .deb ( Ubuntu, RaspberryPi, Mint, ... )**
+If you're running Debian Linux or a derivative of Debian (including Raspberry Pi OS), you should install from our Debian package repo. This requires that you add a new repo list and key to your system and then install as follows:
+```
+echo "deb https://packages.cloud.google.com/apt coral-edgetpu-stable main" | sudo tee /etc/apt/sources.list.d/coral-edgetpu.list
+curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+sudo apt-get update
+sudo apt-get install python3-tflite-runtime
+```
+
+**Using PIP (Other linux, manual venv, ..)**
+For all other systems, you can install with pip. First, create a new virtualenv, initialize it, then install the [TensorFlow Lite runtime package](https://www.tensorflow.org/lite/guide/python) for Python:
 
 ```sh
 pip3 install --extra-index-url https://google-coral.github.io/py-repo/ tflite_runtime
 ```
 
+### 2) Clone from GitHub.com
 Then finish with the following:
 ```sh
 pip install git+https://github.com/nathanrooy/rpi-urban-mobility-tracker
