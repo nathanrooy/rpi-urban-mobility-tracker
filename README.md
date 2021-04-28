@@ -87,6 +87,15 @@ umt -video highway_01.mp4
 ```
 If everything worked correctly, you should see a directory labeled `output` filled with 10 annotated video frames.
 
+7) Run the raspi-cam    
+After making sure you enabled your raspi-cam by using `raspi-config`
+```sh
+xhost +; docker run --rm --env="DISPLAY" --net=host -it --privileged --mount type=bind,src={UMT_DIR},dst=/root umt umt -camera -display   
+```
+If everything worked correctly, and you wait a bit for the loading, a window with the live camera and the tracker should appear.
+_NOTE: To have decent performance is best is to close any other app, starting from the browser._
+
+
 ## Install (Ubuntu)
 First, create a new virtualenv, initialize it, then install the [TensorFlow Lite runtime package](https://www.tensorflow.org/lite/guide/python) for Python:
 
