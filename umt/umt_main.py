@@ -2,6 +2,7 @@
 
 import os
 import time
+import datetime
 import argparse
 
 import cv2
@@ -22,6 +23,8 @@ from umt.umt_utils import generate_detections
 LABEL_PATH = "models/tflite/coco_ssd_mobilenet_v1_1.0_quant_2018_06_29/labelmap.txt"
 DEFAULT_LABEL_MAP_PATH = os.path.join(os.path.dirname(__file__), LABEL_PATH)
 TRACKER_OUTPUT_TEXT_FILE = 'object_paths.csv'
+VIDEO_OUT_ORIGINAL_FRAMES = f'output/{datetime.date.today()}_{int(time.time())}-original-frames.avi'
+VIDEO_OUT_DETECTED_FRAMES = f'output/{datetime.date.today()}_{int(time.time())}-detected-frames.avi'
 
 # deep sort related
 MAX_COSINE_DIST = 0.4
@@ -75,6 +78,9 @@ def main():
 
     # main tracking loop
     print('\n> TRACKING...')
+    originalVideoWriter = None
+    detectedVideoWriter = None
+
     with open(TRACKER_OUTPUT_TEXT_FILE, 'w') as out_file:
         for i, pil_img in enumerate(img_generator(args)):
         
@@ -87,6 +93,13 @@ def main():
             	    'obj_t_since_last_update,obj_hits,'
             	    'xmin,ymin,xmax,ymax')
             	print(header, file=out_file)
+
+            	if args.save_frames:
+            	    # note: selecting 10fps is certainly wrong-- the wrongness will depend on the speed of processing (most specifically if 
+            	    # we have GPU / TPU capabilities.)
+            	    originalVideoWriter = cv2.VideoWriter(VIDEO_OUT_ORIGINAL_FRAMES,cv2.VideoWriter_fourcc('M','J','P','G'), 10, (pil_img.width,pil_img.height))
+            	    detectedVideoWriter = cv2.VideoWriter(VIDEO_OUT_DETECTED_FRAMES,cv2.VideoWriter_fourcc('M','J','P','G'), 10, (pil_img.width,pil_img.height))
+
 
             # get detections
             detections = generate_detections(pil_img, interpreter, args.threshold)
@@ -117,6 +130,10 @@ def main():
             	# convert pil image to cv2
                 cv2_img = cv2.cvtColor(np.array(pil_img), cv2.COLOR_RGB2BGR)
             
+                # write a frame to the "original" video
+                if args.save_frames: 
+                    originalVideoWriter.write(cv2_img)
+
             	# cycle through actively tracked objects
                 for track in tracker.tracks:
                     if not track.is_confirmed() or track.time_since_update > 1:
@@ -136,8 +153,16 @@ def main():
                     cv2.waitKey(1)
                     
                 # persist frames
-                if args.save_frames: cv2.imwrite(f'output/frame_{i}.jpg', cv2_img)
-                
+                if args.save_frames: 
+                    cv2.imwrite(f'output/frame_{i}.jpg', cv2_img)
+                    # write a frame to the "detected" video
+                    detectedVideoWriter.write(cv2_img)
+
+    #cleanup the video resources                
+    if args.save_frames:
+        originalVideoWriter.release()
+        detectedVideoWriter.release()
+
     cv2.destroyAllWindows()         
     pass
 
