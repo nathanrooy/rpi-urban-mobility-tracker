@@ -22,7 +22,7 @@ from umt.umt_utils import generate_detections
 
 LABEL_PATH = "models/tflite/coco_ssd_mobilenet_v1_1.0_quant_2018_06_29/labelmap.txt"
 DEFAULT_LABEL_MAP_PATH = os.path.join(os.path.dirname(__file__), LABEL_PATH)
-TRACKER_OUTPUT_TEXT_FILE = 'object_paths.csv'
+TRACKER_OUTPUT_TEXT_FILE = f'object_paths/object_paths_{datetime.date.today()}_{int(time.time())}.csv'
 VIDEO_OUT_ORIGINAL_FRAMES = f'output/{datetime.date.today()}_{int(time.time())}-original-frames.avi'
 VIDEO_OUT_DETECTED_FRAMES = f'output/{datetime.date.today()}_{int(time.time())}-detected-frames.avi'
 
