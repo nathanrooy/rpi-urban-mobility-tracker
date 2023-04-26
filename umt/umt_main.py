@@ -89,16 +89,16 @@ def main():
             
             # add header to trajectory file
             if i == 0:
-            	header = (f'frame_num,rpi_time,obj_class,obj_id,obj_age,'
-            	    'obj_t_since_last_update,obj_hits,'
-            	    'xmin,ymin,xmax,ymax')
-            	print(header, file=out_file)
+                header = (f'frame_num,rpi_time,obj_class,obj_id,obj_age,'
+                    'obj_t_since_last_update,obj_hits,'
+                    'xmin,ymin,xmax,ymax')
+                print(header, file=out_file)
 
-            	if args.save_frames:
-            	    # note: selecting 10fps is certainly wrong-- the wrongness will depend on the speed of processing (most specifically if 
-            	    # we have GPU / TPU capabilities.)
-            	    originalVideoWriter = cv2.VideoWriter(VIDEO_OUT_ORIGINAL_FRAMES,cv2.VideoWriter_fourcc('M','J','P','G'), 10, (pil_img.width,pil_img.height))
-            	    detectedVideoWriter = cv2.VideoWriter(VIDEO_OUT_DETECTED_FRAMES,cv2.VideoWriter_fourcc('M','J','P','G'), 10, (pil_img.width,pil_img.height))
+                if args.save_frames:
+                    # note: selecting 10fps is certainly wrong-- the wrongness will depend on the speed of processing (most specifically if 
+                    # we have GPU / TPU capabilities.)
+                    originalVideoWriter = cv2.VideoWriter(VIDEO_OUT_ORIGINAL_FRAMES,cv2.VideoWriter_fourcc('M','J','P','G'), 10, (pil_img.width,pil_img.height))
+                    detectedVideoWriter = cv2.VideoWriter(VIDEO_OUT_DETECTED_FRAMES,cv2.VideoWriter_fourcc('M','J','P','G'), 10, (pil_img.width,pil_img.height))
 
 
             # get detections
