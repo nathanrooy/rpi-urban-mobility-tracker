@@ -1,9 +1,0 @@
-deep_sort @ https://github.com/mk-michal/deep_sort/archive/master.zip#egg=deep_sort-1.2.0
-filterpy
-imutils
-numpy
-pillow
-opencv-python
-scipy
-scikit-image
-tensorflow
