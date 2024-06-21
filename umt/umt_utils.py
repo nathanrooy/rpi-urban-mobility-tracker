@@ -74,6 +74,22 @@ def video_frame_gen(args):
         yield Image.fromarray(frame)
 
 
+def rtsp_frame_gen(args):
+
+    cap = cv2.VideoCapture(args.rtsp_url, cv2.CAP_FFMPEG)
+
+    while True:
+        if cv2.waitKey(1) & 0xFF == ord('q'): break
+
+        # pull frame from video stream
+        _, frame = cap.read()
+
+        # array to PIL image format
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+
+        yield Image.fromarray(frame)
+
+
 def initialize_img_source(args):
 
     # track objects from video file
@@ -85,6 +101,8 @@ def initialize_img_source(args):
     # track objects from camera source
     if args.camera: return camera_frame_gen
 
+    # track objects from RTSP camera feed
+    if args.rtsp_url: return rtsp_frame_gen
 
 def initialize_detector(args):
 

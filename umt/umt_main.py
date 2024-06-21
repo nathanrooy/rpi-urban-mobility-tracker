@@ -38,6 +38,7 @@ def main():
     parser.add_argument('-imageseq', dest='image_path', type=str, required=False, help='specify an image sequence')
     parser.add_argument('-video', dest='video_path', type=str, required=False, help='specify video file')
     parser.add_argument('-camera', dest='camera', default=False, action='store_true', help='specify this when using the rpi camera as the input')
+    parser.add_argument('-rtsp', dest='rtsp_url', type=str, required=False, help='specify RTSP camera URL')
     parser.add_argument('-threshold', dest='threshold', type=float, default=0.5, required=False, help='specify a custom inference threshold')
     parser.add_argument('-tpu', dest='tpu', required=False, default=False, action='store_true', help='add this when using a coral usb accelerator')
     parser.add_argument('-nframes', dest='nframes', type=int, required=False, default=10, help='specify nunber of frames to process')
