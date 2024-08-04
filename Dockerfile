@@ -56,7 +56,7 @@ RUN apt-get install -y vim
 RUN apt-get install -y git
 
 # install deep sort
-RUN pip3 install git+https://github.com/mk-michal/deep_sort
+RUN pip3 install git+https://github.com/mk-michal/deep_sort.git@v1.2.0
 
 # install umt
 RUN pip3 install git+https://github.com/nathanrooy/rpi-urban-mobility-tracker --no-deps
